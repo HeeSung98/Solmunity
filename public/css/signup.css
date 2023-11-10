@@ -1,0 +1,102 @@
+@import url('/css/font.css');
+
+* {
+  font-family: 'HakgyoansimWoojuR';
+}
+
+html,
+body {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+}
+
+.main {
+  width: 100%;
+  margin: auto;
+  /* justify-content: space-around; */
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  height: 100%;
+  bottom: 0;
+  justify-content: space-around;
+  position: absolute;
+}
+
+.signUp {
+  margin-bottom: 15px;
+  display: flex;
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 10%;
+}
+
+span {
+  letter-spacing: 7px;
+  text-align: center;
+  width: 100%;
+  font-family: 'HANAMDAUM';
+  /* height: 100%; */
+  /* font-family: 'HakgyoansimDoldamB'; */
+  /* font-weight: 800; */
+  font-size: xx-large;
+}
+
+.signUpDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 70%;
+  justify-content: center;
+}
+#formSignup {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+}
+.innerform {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-content: center; */
+  align-items: left;
+  width: 80%;
+}
+input {
+  width: 95%;
+  height: 30px;
+  margin-bottom: 10px;
+  background: rgb(237, 235, 235);
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 10px;
+  padding-left: 5%;
+}
+button {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+  /* background: rgb(234, 244, 78); */
+  background: greenyellow;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+}

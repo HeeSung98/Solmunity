@@ -1,0 +1,189 @@
+@import url('font.css');
+
+html,
+body {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 90%;
+  margin: auto;
+}
+
+.searchForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 70%;
+  text-align: center;
+}
+
+#btnRegister {
+  display: flex;
+  width: 100px;
+  margin-top: 2%;
+  margin-left: 70%;
+  cursor: pointer;
+  align-items: center;
+}
+
+.title {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+hr {
+  width: 100%;
+  background: #c4c4c4;
+  height: 1px;
+  border: 0;
+}
+.toRegister {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#missionInput {
+  background-color: white;
+  width: 75%;
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+  border-style: none;
+  cursor: pointer;
+}
+#mission {
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 10px;
+  height: 30px;
+  width: 45px;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.innerboard {
+  display: flex;
+  margin: 10px;
+  width: 100%;
+}
+.innerInfo {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 10px;
+}
+.imgDiv {
+  border: 1px solid;
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  margin: 5px;
+}
+
+#img_user {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.contentImg {
+  border-radius: 5%;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.img_del,
+#commentBtn,
+#likeBtn {
+  width: 40px;
+  padding: 5px;
+}
+.innerContent {
+  width: 100%;
+}
+.boardContent {
+  margin: 5px;
+}
+.userNameDate {
+  display: flex;
+  justify-content: space-between;
+}
+.userName {
+  margin-bottom: 10px;
+  color: gray;
+}
+.content {
+  margin-bottom: 10px;
+}
+.contentImg {
+  width: 300px;
+}
+#commentBtn {
+  cursor: pointer;
+}
+#likeBtn {
+  cursor: pointer;
+}
+.postForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+#pContent {
+  border: 0;
+  font-size: 30px;
+  outline-style: none;
+}
+p {
+  display: flex;
+  align-items: center;
+}
+textarea {
+  font-size: 13px;
+  outline-style: none;
+  width: 100%;
+  resize: none;
+  padding-bottom: 0px;
+  border-style: none;
+  border-left: 2px solid gainsboro;
+  padding-left: 7px;
+}
+#replyBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  height: 30px;
+  margin: 5px 0px;
+  background: rgb(234, 244, 78);
+  border-radius: 10px;
+  border: 0;
+}
+
+.btn img {
+  width: 10px;
+  height: 10px;
+}

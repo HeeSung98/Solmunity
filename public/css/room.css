@@ -1,0 +1,121 @@
+html,
+body {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+body {
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  justify-content: space-around;
+  overflow: hidden;
+  height: 90%;
+  margin-top: 5%;
+  position: relative;
+  /* padding-bottom: 30px; */
+}
+.muscat {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  flex-direction: column;
+  /* margin-top: 40%; */
+  justify-content: center;
+}
+#rTitle {
+  display: flex;
+  justify-content: center;
+}
+.color-overlay {
+  position: relative;
+  width: 70%;
+  /* display: flex; */
+  margin: auto;
+  height: 458px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+#muscat {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* width: 100%; */
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.5;
+}
+#muscatFull {
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  object-fit: cover;
+  z-index: 1; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* width: 100%; */
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  clip-path: polygon(
+    0 0,
+    0 100%,
+    0 100%,
+    0 0
+  ); /* 초기에는 이미지를 숨깁니다. */
+}
+
+#color-canvas {
+  width: 171%;
+}
+
+.notice {
+  width: 80%;
+}
+.innerNotice {
+}
+#noticeImg {
+  width: 40px;
+}
+.noticeDiv {
+  display: flex;
+  justify-content: space-around;
+}
+.noticeInputDiv {
+  width: 80%;
+}
+.noticeInput {
+  width: 100%;
+  border: 0;
+  resize: none;
+}
+.registerBtn {
+  border-radius: 8px;
+  width: 40px;
+  background-color: white;
+  border: 1px solid #787777;
+}
+hr {
+  background: #c4c4c4;
+  height: 1px;
+  border: 0;
+}
+.noticeContent {
+  width: 90%;
+}

@@ -1,0 +1,163 @@
+@import url('font.css');
+
+html,
+body {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+  justify-content: space-around;
+  overflow: hidden;
+  height: 90%;
+  /* margin-top: 10%; */
+  position: relative;
+  padding-bottom: 30px;
+  align-items: center;
+}
+
+.title {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.register {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 90%;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+}
+
+#myProfile {
+  border-radius: 50%;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+#profileImg {
+  width: 150px;
+  height: 150px;
+  border: 1px solid gainsboro;
+  border-radius: 50%;
+}
+
+#pencil {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-color: white;
+  border: solid 1px gainsboro;
+  border-radius: 50%;
+  bottom: 0;
+  right: 5%;
+  position: absolute;
+  align-items: center;
+  z-index: 1;
+}
+
+#pencil img {
+  width: 40px;
+}
+
+/* content */
+.content {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+/* 닉네임 */
+.nickname {
+  font-size: 30px;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+/* 프로필 수정 버튼 */
+#btn_edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 40%;
+  cursor: pointer;
+  height: 30px;
+  margin-bottom: 10px;
+  /* background: rgb(234, 244, 78); */
+  background: greenyellow;
+  border-radius: 10px;
+  border: 0;
+}
+
+/* Modal */
+.modalH2 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-family: 'HSSaemaul-Regular';
+  font-size: 30px;
+}
+.modal {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+}
+
+.modal_body {
+  box-sizing: content-box;
+  position: absolute;
+  top: 50%;
+  width: 400px;
+  height: 250px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 10px 15px 0 rgba(34, 36, 38, 0.15);
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* 탈퇴 */
+#btn_delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  height: 30px;
+  margin-bottom: 10px;
+  color: red;
+}

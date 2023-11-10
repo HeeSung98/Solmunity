@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/signup.css" />
+    <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Solmunity</title>
+  </head>
+
+  <%- include('mainHeader') %>
+
+  <body>
+    <div class="main">
+      <div class="content">
+        <div class="signUp">
+          <span>회원가입</span>
+        </div>
+        <div class="signUpDiv">
+          <form name="form_signup" id="formSignup">
+            <div class="innerform">
+              <input
+                type="email"
+                id="email"
+                placeholder="이메일"
+                minlength="5"
+                maxlength="50"
+                required
+              />
+              <br />
+              <input
+                type="text"
+                id="name"
+                placeholder="이름"
+                minlength="2"
+                maxlength="10"
+                required
+              /><br />
+              <input
+                type="text"
+                id="nickname"
+                placeholder="닉네임"
+                minlength="1"
+                maxlength="10"
+                required
+              /><br />
+              <input
+                type="password"
+                id="password"
+                placeholder="비밀번호"
+                minlength="6"
+                maxlength="20"
+                required
+              /><br />
+              <button type="button" onclick="signUp()">회원가입</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    async function signUp() {
+      const form = document.forms['form_signup']
+      const { email, name, nickname, password } = form
+
+      const emailRegex =
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+      const nameRegex = /^[a-zA-Z가-힣\d]{2,10}$/
+      const nicknameRegex = /^[a-zA-Z가-힣\d]{1,10}$/
+      const passwordRegex =
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,}$/
+
+      if (!emailRegex.test(email.value)) {
+        alert('이메일 형식을 올바르게 작성해주세요')
+        return false
+      }
+      if (!nameRegex.test(name.value)) {
+        alert('이름은 2자 이상, 10자 이하로 입력해 주세요.')
+        return false
+      }
+      if (!nicknameRegex.test(nickname.value)) {
+        alert('닉네임은 1자 이상, 10자 이하로 입력해 주세요.')
+        return false
+      }
+      if (!passwordRegex.test(password.value)) {
+        alert(
+          '비밀번호는 최소 8자 이상이어야 하며, 영어, 숫자, 특수문자를 포함해야 합니다.'
+        )
+        return false
+      }
+
+      const data = {
+        email: email.value,
+        name: name.value,
+        nickname: nickname.value,
+        password: password.value,
+        fromSocial: 0,
+      }
+
+      const respone = await axios({
+        method: 'POST',
+        url: '/main/signup',
+        data,
+      })
+      const resData = respone.data
+      console.log('resData:', resData)
+
+      if (resData.result) {
+        alert('회원가입이 완료되었습니다')
+        document.location.href = 'signin'
+      } else {
+        alert(resData.message)
+      }
+    }
+  </script>
+</html>

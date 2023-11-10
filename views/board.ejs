@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solmunity</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <%- include('header') %>
+    <div class="main">
+      <div class="searchForm">
+        <form>
+          <select>
+            <option>제목</option>
+            <option>작성자</option>
+            <option>게시글</option>
+          </select>
+          <input type="text" id="search" />
+          <button>검색</button>
+        </form>
+      </div>
+      <button id="btnRegister" type="button" onclick="register()">
+        게시글 작성
+      </button>
+    </div>
+  </body>
+
+  <script>
+    const btnRegister = document.querySelector('#btnRegister')
+  </script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <title>Solmunity</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+
+  <div class="main"></div>
+  <body>
+    <%- include('header') %>
+    <div class="main"></div>
+    <div class="title">솔리디티 개발자를 위한 커뮤니티</div>
+
+    <div class="loginDiv">
+      <div class="innerform">
+        <button type="button" id="btn">그린머스캣 수확하러 가기</button>
+
+        <!-- -------------------------------------------------------------- -->
+        <!-- 로그인 정보 얻기 위한 폼 -->
+        <form method="post" action="/main" name="postMain" hidden>
+          <input type="text" name="email" />
+        </form>
+        <!-- -------------------------------------------------------------- -->
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const noticeContent = document.querySelector('.noticeContent')
+    noticeContent.innerText = room.notice
+    const rTitle = document.querySelector('#rTitle')
+    rTitle.innerHTML = `${room.rTitle}`
+
+    // toggle
+    function toggleSections() {
+      if (replyText.style.display === 'none') {
+        replyText.style.display = 'block'
+      } else {
+        replyText.style.display = 'none'
+      }
+    }
+
+    //textarea 자동 높이 조절
+    const $textarea = document.querySelector('#notice')
+    $textarea.oninput = (event) => {
+      const $target = event.target
+      $target.style.height = 0
+      $target.style.height = 5 + $target.scrollHeight + 'px'
+    }
+  </script>
+</html>

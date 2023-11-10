@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <title>Solmunity</title>
+    <link rel="stylesheet" href="/css/signin.css" />
+  </head>
+
+  <body>
+    <div class="main">
+      <form name="nick" method="post" action="/main/select">
+        <input type="hidden" name="nickname" />
+      </form>
+      <div class="content">
+        <div class="logoDiv">
+          <img id="logo" src="/img/logo_siginin.png" alt="logo" />
+        </div>
+        <div class="loginDiv">
+          <form name="form_signin" id="formSignin">
+            <div class="innerform">
+              <label for="email">이메일</label>
+              <input type="email" id="email" placeholder="이메일" />
+              <label for="password">비밀번호</label>
+              <input type="password" id="password" placeholder="비밀번호" />
+              <button type="button" id="btn" onclick="signIn()">로그인</button>
+            </div>
+          </form>
+          <form method="post" action="/main" name="postMain" hidden>
+            <input type="text" name="email" />
+          </form>
+          <hr />
+          <div class="bottom">
+            <div class="Q">그린머스켓이 처음이신가요?</div>
+            <a href="/main/signup">회원가입</a>
+            <br />
+            <img src="/img/earth.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    async function signIn() {
+      let form = document.forms['form_signin']
+      const email = form.email.value
+      const password = form.password.value
+      const data = {
+        email,
+        password,
+      }
+
+      const respone = await axios({
+        method: 'POST',
+        url: '/main/signin',
+        data,
+      })
+      const resData = respone.data
+      console.log(resData)
+
+      if (resData.result) {
+        alert('로그인 성공')
+        localStorage.setItem('token', resData.token)
+        localStorage.setItem('user', JSON.stringify(resData.user))
+        form = document.forms['postMain']
+        form.email.value = JSON.parse(localStorage.getItem('user')).email
+        form.submit()
+      } else {
+        alert(`${resData.message}`)
+        document.location.reload()
+      }
+    }
+  </script>
+</html>

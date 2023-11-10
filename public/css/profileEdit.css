@@ -1,0 +1,40 @@
+@import url('/css/font.css');
+
+html,
+body {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+  justify-content: space-around;
+  overflow: hidden;
+  height: 100%;
+  /* margin-top: 10%; */
+  position: relative;
+  padding-bottom: 30px;
+  align-items: center;
+}
+
+/* 회원 정보 수정(h2) */
+h2 {
+  font-size: 50px;
+}
+
+.content {
+}
+
+form {
+  font-size: 25px;
+  font-weight: bold;
+}

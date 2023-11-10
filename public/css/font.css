@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+/* HS새마을체 */
+@font-face {
+  font-family: 'HSSaemaul-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSSaemaul-Regular.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+/* 다이어리체 */
+@font-face {
+  font-family: 'EarlyFontDiary';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+/* 학교안심 우주체 */
+@font-face {
+  font-family: 'HakgyoansimWoojuR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+/* 학교안심 돌담체 */
+@font-face {
+  font-family: 'HakgyoansimDoldamB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimDoldamB.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Rix이누아리두리네체 */
+@font-face {
+  font-family: 'RixInooAriDuriR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HANAMDAUM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 롯데리아 */
+@font-face {
+  font-family: 'LOTTERIACHAB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIACHAB.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}

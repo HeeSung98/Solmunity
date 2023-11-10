@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div class="header">
+      <div
+        class="innerLog"
+        style="
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <img
+          src="/img/logo.png"
+          alt="logo"
+          onclick="postIndex()"
+          id="webName"
+        />
+        <div class="innerHeaderLogin">로그아웃</div>
+      </div>
+
+      <div class="innerHeaderLogo">
+        <img src="/img/home.svg" onclick="postIndex()" class="home" />
+        <img src="/img/board.svg" onclick="postBoard()" class="board" />
+        <img src="/img/graph.svg" onclick="postGraph()" class="graph" />
+        <img src="/img/profile.svg" onclick="postProfile()" class="profile" />
+      </div>
+    </div>
+
+    <form action="/" method="post" name="postIndexForm" hidden></form>
+    <form action="/board" method="post" name="postBoardForm" hidden></form>
+    <form action="/graph" method="post" name="postGraphForm" hidden></form>
+    <form action="/profile" method="post" name="postProfileForm" hidden></form>
+  </body>
+  <script>
+    const user = JSON.parse(localStorage.getItem('user'))
+    const userRole = localStorage.getItem('userRole')
+    console.log('user:', user)
+    console.log('userRole:', userRole)
+
+    window.addEventListener('load', checkLoginStatus())
+
+    // 로그인 식별
+    function checkLoginStatus() {
+      const token = localStorage.getItem('token')
+      const innerHeaderLogin = document.querySelector('.innerHeaderLogin')
+
+      if (token) {
+        // 토큰과 닉네임이 로컬 스토리지에 존재하는 경우
+        // 로그인 상태로 판별하고 해당 닉네임을 사용
+        innerHeaderLogin.innerText = '로그아웃'
+        innerHeaderLogin.onclick = async () => {
+          const respone = await axios({
+            method: 'POST',
+            url: '/signout',
+          })
+          const resData = respone.data
+          console.log(resData)
+
+          if (resData.logoutSuccess) {
+            console.log('로그아웃 ok')
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            localStorage.removeItem('room')
+            localStorage.removeItem('nickname')
+            document.location.href = '/'
+          }
+        }
+      } else {
+        // 토큰 또는 닉네임이 로컬 스토리지에 없는 경우
+        // 로그인 상태가 아니라고 판별하고 "Guest" 닉네임 사용
+        innerHeaderLogin.innerText = '로그인'
+        innerHeaderLogin.onclick = () => {
+          window.location.href = '/signin'
+        }
+      }
+    }
+
+    //메인페이지로 이동
+    function postIndex() {
+      const postIndexFrom = document.forms['postIndexForm'] // 방 페이지 이동을 위한 히든 폼
+      postIndexFrom.submit()
+    }
+    //게시판으로 이동
+    function postBoard() {
+      const postBoardForm = document.forms['postBoardForm'] // 게시글 호출을 위한 히든 폼
+      postBoardForm.submit()
+    }
+    //그래프로 이동
+    function postGraph() {
+      const postGraphForm = document.forms['postGraphForm'] // 게시글 호출을 위한 히든 폼
+      postGraphForm.submit()
+    }
+    //프로필로 이동
+    function postProfile() {
+      const postProfileForm = document.forms['postProfileForm'] // 게시글 호출을 위한 히든 폼
+      postProfileForm.submit()
+    }
+  </script>
+</html>
