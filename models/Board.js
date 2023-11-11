@@ -1,16 +1,20 @@
 const { DataTypes } = require('sequelize')
 
-const POST = (sequelize) => {
+const BOARD = (sequelize) => {
   return sequelize.define(
-    'POST',
+    'BOARD',
     {
-      pNo: {
+      bNo: {
         type: DataTypes.BIGINT(20),
         primaryKey: true,
         autoIncrement: true,
       },
-      pContent: {
+      title: {
         type: DataTypes.STRING(30),
+        allowNull: false,
+      },
+      content: {
+        type: DataTypes.STRING(),
         allowNull: false,
       },
       like: {
@@ -27,4 +31,4 @@ const POST = (sequelize) => {
   )
 }
 
-module.exports = POST
+module.exports = BOARD

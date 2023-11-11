@@ -10,6 +10,8 @@ const patchController = require('../controller/PatchController')
 const deleteController = require('../controller/DeleteController')
 dotenv.config()
 
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ AWS S3 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
 aws.config.update({
   accessKeyId: process.env.S3_KEYID,
   secretAccessKey: process.env.S3_ACCESSKEY,
@@ -18,6 +20,20 @@ aws.config.update({
 })
 
 const s3 = new aws.S3()
+
+const uploadBoard = multer({
+  storage: multerS3({
+    s3,
+    bucket: process.env.S3_BUCKET,
+    acl: 'public-read',
+    metadata: function (req, file, callback) {
+      callback(null, { fieldName: file.fieldname })
+    },
+    key: function (req, file, callback) {
+      callback(null, 'room-' + Date.now().toString() + '-' + file.originalname)
+    },
+  }),
+})
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ GET ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
@@ -38,5 +54,13 @@ router.post('/board', postController.postBoard)
 router.post('/graph', postController.postGraph)
 
 router.post('/profile', postController.postProfile)
+
+router.post('/register', postController.postRegister)
+
+router.post(
+  '/register/action',
+  uploadBoard.single('file'),
+  postController.postRegisterAction
+)
 
 module.exports = router

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 
-const Reply = (sequelize) => {
+const REPLY = (sequelize) => {
   return sequelize.define(
     'REPLY',
     {
@@ -13,6 +13,10 @@ const Reply = (sequelize) => {
         type: DataTypes.STRING(30),
         allowNull: false,
       },
+      like: {
+        type: DataTypes.BIGINT(20),
+        defaultValue: 0,
+      },
       MEMBER_email: DataTypes.STRING(50),
     },
     {
@@ -24,4 +28,4 @@ const Reply = (sequelize) => {
   )
 }
 
-module.exports = Reply
+module.exports = REPLY

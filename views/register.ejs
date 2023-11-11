@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solmunity</title>
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <%- include('header') %>
+    <div class="main">
+      <div class="register">
+        <div class="title">Register</div>
+        <div class="innerRegister">
+          <div class="innerInfo">
+            <form id="formPostAction">
+              <input type="text" id="writer" hidden />
+              <textarea id="title" placeholder="제목"></textarea>
+              <textarea id="content" placeholder="내용"></textarea><br />
+              <input type="file" id="file" /><br /><br />
+              <button id="registerBtn" type="button" onclick="boardRegister()">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form action="/board" method="post" name="formPostBoard" hidden>
+      <input type="text" name="rNo" />
+    </form>
+  </body>
+
+  <script>
+    const boardForm = document.forms['formPostBoard']
+
+    async function boardRegister() {
+      const form = document.forms['formPostAction']
+      const file = document.querySelector('#file')
+
+      const data = new FormData()
+      data.append('title', form.title.value)
+      data.append('content', form.title.value)
+      //data.append('MEMBER_email', user.email)
+      data.append('file', file.files[0])
+
+      const respone = await axios({
+        method: 'POST',
+        data,
+        url: '/register/action',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      resData = respone.data
+      console.log(resData)
+
+      if (resData.result) {
+        alert(resData.message)
+        boardForm.submit()
+      } else {
+        console.log('err:', resData.error)
+      }
+    }
+  </script>
+</html>

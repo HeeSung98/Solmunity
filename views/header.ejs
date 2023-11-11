@@ -35,10 +35,10 @@
       </div>
     </div>
 
-    <form action="/" method="post" name="postIndexForm" hidden></form>
-    <form action="/board" method="post" name="postBoardForm" hidden></form>
-    <form action="/graph" method="post" name="postGraphForm" hidden></form>
-    <form action="/profile" method="post" name="postProfileForm" hidden></form>
+    <form action="/" method="post" name="formPostIndex" hidden></form>
+    <form action="/board" method="post" name="formPostBoard" hidden></form>
+    <form action="/graph" method="post" name="formPostGraph" hidden></form>
+    <form action="/profile" method="post" name="formPostProfile" hidden></form>
   </body>
   <script>
     const user = JSON.parse(localStorage.getItem('user'))
@@ -86,23 +86,23 @@
 
     //메인페이지로 이동
     function postIndex() {
-      const postIndexFrom = document.forms['postIndexForm'] // 방 페이지 이동을 위한 히든 폼
+      const postIndexFrom = document.forms['formPostIndex'] // 방 페이지 이동을 위한 히든 폼
       postIndexFrom.submit()
     }
     //게시판으로 이동
     function postBoard() {
-      const postBoardForm = document.forms['postBoardForm'] // 게시글 호출을 위한 히든 폼
-      postBoardForm.submit()
+      const formPostBoard = document.forms['formPostBoard'] // 게시글 호출을 위한 히든 폼
+      formPostBoard.submit()
     }
     //그래프로 이동
     function postGraph() {
-      const postGraphForm = document.forms['postGraphForm'] // 게시글 호출을 위한 히든 폼
-      postGraphForm.submit()
+      const formPostGraph = document.forms['formPostGraph'] // 게시글 호출을 위한 히든 폼
+      formPostGraph.submit()
     }
     //프로필로 이동
     function postProfile() {
-      const postProfileForm = document.forms['postProfileForm'] // 게시글 호출을 위한 히든 폼
-      postProfileForm.submit()
+      const formPostProfile = document.forms['formPostProfile'] // 게시글 호출을 위한 히든 폼
+      formPostProfile.submit()
     }
   </script>
 </html>

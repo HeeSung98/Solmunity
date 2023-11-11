@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 
-const Member = (sequelize) => {
+const MEMBER = (sequelize) => {
   return sequelize.define(
     'MEMBER',
     {
@@ -24,10 +24,6 @@ const Member = (sequelize) => {
         type: DataTypes.TINYINT(1),
         allowNull: false,
       },
-      mImg: {
-        type: DataTypes.STRING(255),
-        defaultValue: null,
-      },
     },
     {
       charset: 'utf8', // 한국어 설정
@@ -38,4 +34,4 @@ const Member = (sequelize) => {
   )
 }
 
-module.exports = Member
+module.exports = MEMBER

@@ -19,53 +19,53 @@ if (config.use_env_variable) {
   )
 }
 
-db.mMember = require('./Member')(sequelize)
-db.mPost = require('./Post')(sequelize)
-db.mPostImage = require('./PostImage')(sequelize)
-db.mReply = require('./Reply')(sequelize)
+db.MEMBER = require('./Member')(sequelize)
+db.BOARD = require('./Board')(sequelize)
+db.BOARD_IMAGE = require('./BoardImage')(sequelize)
+db.REPLY = require('./Reply')(sequelize)
 
 // 멤버와 게시물의 연관관계
-db.mMember.hasMany(db.mPost, {
+db.MEMBER.hasMany(db.BOARD, {
   foreignKey: 'MEMBER_email',
   sourceKey: 'email',
   onDelete: 'CASCADE',
 })
-db.mPost.belongsTo(db.mMember, {
+db.BOARD.belongsTo(db.MEMBER, {
   foreignKey: 'MEMBER_email',
   sourceKey: 'email',
 })
 
 // 멤버와 댓글의 연관관계
-db.mMember.hasMany(db.mReply, {
+db.MEMBER.hasMany(db.REPLY, {
   foreignKey: 'MEMBER_email',
   sourceKey: 'email',
   onDelete: 'CASCADE',
 })
-db.mReply.belongsTo(db.mMember, {
+db.REPLY.belongsTo(db.MEMBER, {
   foreignKey: 'MEMBER_email',
   sourceKey: 'email',
 })
 
 // 게시글과 댓글의 연관관계
-db.mPost.hasMany(db.mReply, {
-  foreignKey: 'POST_pNo',
-  sourceKey: 'pNo',
+db.BOARD.hasMany(db.REPLY, {
+  foreignKey: 'BOARD_bNo',
+  sourceKey: 'bNo',
   onDelete: 'CASCADE',
 })
-db.mReply.belongsTo(db.mPost, {
-  foreignKey: 'POST_pNo',
-  sourceKey: 'pNo',
+db.REPLY.belongsTo(db.BOARD, {
+  foreignKey: 'BOARD_bNo',
+  sourceKey: 'bNo',
 })
 
 //게시글과 게시글이미지의 연관관계
-db.mPost.hasMany(db.mPostImage, {
-  foreignKey: 'POST_pNo',
-  sourceKey: 'pNo',
+db.BOARD.hasMany(db.BOARD_IMAGE, {
+  foreignKey: 'BOARD_bNo',
+  sourceKey: 'bNo',
   onDelete: 'CASCADE',
 })
-db.mPostImage.belongsTo(db.mPost, {
-  foreignKey: 'POST_pNo',
-  sourceKey: 'pNo',
+db.BOARD_IMAGE.belongsTo(db.BOARD, {
+  foreignKey: 'BOARD_bNo',
+  sourceKey: 'bNo',
 })
 
 db.sequelize = sequelize

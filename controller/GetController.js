@@ -17,7 +17,7 @@ const getSignin = (req, res) => {
 }
 
 const getSignup = (req, res) => {
-  res.render('singup')
+  res.render('signup')
 }
 
 const getBoard = (req, res) => {

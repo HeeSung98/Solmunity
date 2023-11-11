@@ -187,3 +187,26 @@ textarea {
   width: 10px;
   height: 10px;
 }
+
+/* 테이블 */
+#table {
+  font-size: 25px;
+  width: 80vw;
+  text-align: left;
+}
+
+#no {
+  width: 10vw;
+}
+
+#title {
+  width: 40vw;
+}
+
+#writer {
+  width: 15vw;
+}
+
+#regDate {
+  width: 15vw;
+}

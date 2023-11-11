@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize')
 
-const PostImage = (sequelize) => {
+const BOARD_IMAGE = (sequelize) => {
   return sequelize.define(
-    'POST_IMAGE',
+    'BOARD_IMAGE',
     {
       iNo: {
         type: DataTypes.BIGINT(20),
@@ -25,4 +25,4 @@ const PostImage = (sequelize) => {
   )
 }
 
-module.exports = PostImage
+module.exports = BOARD_IMAGE

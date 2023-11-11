@@ -32,10 +32,28 @@
       <button id="btnRegister" type="button" onclick="register()">
         게시글 작성
       </button>
+      <form id="formPostRegister" action="/register" method="post"></form>
+      <br /><br />
+
+      <div class="board">
+        <table id="table">
+          <tr>
+            <th id="no">No</th>
+            <th id="title">Title</th>
+            <th id="writer">Writer</th>
+            <th id="regDate">RegDate</th>
+          </tr>
+        </table>
+      </div>
     </div>
   </body>
 
   <script>
     const btnRegister = document.querySelector('#btnRegister')
+
+    function register() {
+      const formPostRegister = document.querySelector('#formPostRegister')
+      formPostRegister.submit()
+    }
   </script>
 </html>
