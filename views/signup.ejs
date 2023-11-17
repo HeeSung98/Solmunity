@@ -15,7 +15,7 @@
       <div class="content">
         <div class="signUpDiv">
           <br />
-          <form name="form_signup" id="formSignup">
+          <form id="formPostSignupAction">
             <div class="innerform">
               <label for="email">이메일</label>
               <input
@@ -73,7 +73,7 @@
 
   <script>
     async function signUp() {
-      const form = document.forms['form_signup']
+      const form = document.forms['formPostSignupAction']
       const { email, name, nickname, password, passwordTest } = form
 
       const emailRegex =
@@ -101,7 +101,7 @@
         )
         return false
       }
-      if (password !== passwordTest) {
+      if (password.value !== passwordTest.value) {
         alert('비밀번호가 일치하지 않습니다.')
         return false
       }
@@ -116,7 +116,7 @@
 
       const respone = await axios({
         method: 'POST',
-        url: '/main/signup',
+        url: '/signup/action',
         data,
       })
       const resData = respone.data

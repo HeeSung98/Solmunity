@@ -102,21 +102,13 @@ input {
   height: 50px;
   margin-bottom: 10px;
   /* background: rgb(234, 244, 78); */
-  background: lightgray;
+  background: skyblue;
   border-radius: 10px;
   border: 0;
   margin: auto;
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
-}
-
-/* 필요한 css 인가요?? */
-#formSignin {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  align-items: center;
 }
 
 hr {

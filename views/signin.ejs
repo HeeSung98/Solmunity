@@ -20,16 +20,16 @@
           <img id="logo" src="/img/logo.png" alt="logo" />
         </div>
         <div class="loginDiv">
-          <form name="form_signin" id="formSignin">
+          <form id="formSigninAction">
             <div class="innerform">
               <label for="email">이메일</label>
-              <input type="email" id="email" placeholder="이메일" />
+              <input type="email" id="email" placeholder="이메일" /><br />
               <label for="password">비밀번호</label>
               <input type="password" id="password" placeholder="비밀번호" />
-              <button type="button" id="btn" onclick="signin()">로그인</button>
+              <button id="btn" type="button" onclick="signin()">로그인</button>
             </div>
           </form>
-          <form method="post" action="/main" name="postMain" hidden>
+          <form method="post" action="/board" name="formPostBoard" hidden>
             <input type="text" name="email" />
           </form>
           <hr />
@@ -45,7 +45,7 @@
 
   <script>
     async function signin() {
-      let form = document.forms['form_signin']
+      let form = document.forms['formSigninAction']
       const email = form.email.value
       const password = form.password.value
       const data = {
@@ -63,10 +63,13 @@
 
       if (resData.result) {
         alert('로그인 성공')
-        localStorage.setItem('token', resData.token)
-        localStorage.setItem('user', JSON.stringify(resData.user))
-        form = document.forms['postMain']
-        form.email.value = JSON.parse(localStorage.getItem('user')).email
+        const member = {
+          value: JSON.stringify(resData.member),
+          expire: Date.now() + 1000 * 60 * 30, // ms단위, 30분
+        }
+        localStorage.setItem('member', JSON.stringify(resData.member))
+        form = document.forms['formPostBoard']
+        form.email.value = JSON.parse(localStorage.getItem('member')).email
         form.submit()
       } else {
         alert(`${resData.message}`)

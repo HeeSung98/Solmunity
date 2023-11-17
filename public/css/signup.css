@@ -67,12 +67,14 @@ span {
   height: 70%;
   justify-content: center;
 }
-#formSignup {
+
+#formPostSignupAction {
   display: flex;
   flex-direction: column;
   width: 80%;
   align-items: center;
 }
+
 .innerform {
   display: flex;
   flex-direction: column;
@@ -97,7 +99,7 @@ button {
   height: 36px;
   margin-bottom: 10px;
   /* background: rgb(234, 244, 78); */
-  background: lightgray;
+  background: skyblue;
   border-radius: 10px;
   border: 0;
   cursor: pointer;

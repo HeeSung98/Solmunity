@@ -10,15 +10,6 @@
   cursor: pointer;
 }
 
-/* .header {
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 20px;
-  font-weight: bold;
-} */
-
 .header {
   height: 60px; /* 기존 50px */
   display: flex;
@@ -38,11 +29,8 @@
   width: 120px;
 }
 
-.innerHeaderLogo,
-.innerHeaderLogin {
-  cursor: pointer;
-}
 .innerHeaderLogo {
+  cursor: pointer;
   display: flex;
   align-items: center;
   position: absolute;
@@ -50,30 +38,30 @@
   justify-content: space-evenly;
 }
 
-.home {
+.homeImg {
   width: 30px;
   height: 30px;
   margin-top: 7px;
 }
-.board {
+.boardImg {
   width: 35px;
   height: 35px;
   margin-top: 7px;
 }
-.graph {
+.graphImg {
   width: 27px;
   height: 27px;
   margin-top: 2.5px;
   margin-bottom: 4px;
 }
-.profile {
+.profileImg {
   width: 25px;
   height: 25px;
   margin-bottom: 3px;
 }
 
 .innerHeaderLogin:hover {
-  /* color: rgb(187, 245, 72); */
+  cursor: pointer;
   color: gray;
   font-size: 1em;
   font-weight: 800;

@@ -18,32 +18,47 @@
   <body>
     <%- include('header') %>
     <div class="main">
-      <div class="searchForm">
+      <div class="divSearch">
         <form>
-          <select>
-            <option>제목</option>
-            <option>작성자</option>
-            <option>게시글</option>
-          </select>
-          <input type="text" id="search" />
-          <button>검색</button>
+          <div class="formSearch">
+            <input type="text" class="text" />
+            <img src="/img/search.svg" onclick="search()" class="search" />
+          </div>
         </form>
       </div>
-      <button id="btnRegister" type="button" onclick="register()">
-        게시글 작성
-      </button>
-      <form id="formPostRegister" action="/register" method="post"></form>
-      <br /><br />
+
+      <div class="register">
+        <button id="btnRegister" type="button" onclick="register()">
+          게시글 작성
+        </button>
+        <form
+          id="formPostRegister"
+          action="/board/register"
+          method="post"
+        ></form>
+      </div>
 
       <div class="board">
         <table id="table">
-          <tr>
-            <th id="no">No</th>
-            <th id="title">Title</th>
-            <th id="writer">Writer</th>
-            <th id="regDate">RegDate</th>
+          <tr class="tableHead">
+            <th id="no">번호</th>
+            <th id="title">제목</th>
+            <th id="writer">작성자</th>
+            <th id="regDate">작성일</th>
           </tr>
+          <% for(let i = data.bNoList.length - 1 ; i >= 0; i--) { %>
+          <tr class="tableBody" onclick="read(<%= data.bNoList[i] %>)">
+            <td><%= data.bNoList[i] %></td>
+            <td><%= data.titleList[i] %></td>
+            <td><%= data.writerList[i] %></td>
+            <td id="regDate"><%= data.dateList[i] %></td>
+          </tr>
+          <% } %>
         </table>
+        <form id="formPostRead" action="/board/read" method="post" hidden>
+          <input type="text" name="email" />
+          <input type="text" name="bNo" />
+        </form>
       </div>
     </div>
   </body>
@@ -52,8 +67,29 @@
     const btnRegister = document.querySelector('#btnRegister')
 
     function register() {
-      const formPostRegister = document.querySelector('#formPostRegister')
-      formPostRegister.submit()
+      if (member == null) {
+        alert('로그인 후 글을 작성할 수 있습니다')
+        window.location.href = '/signin'
+      } else {
+        const formPostRegister = document.querySelector('#formPostRegister')
+        formPostRegister.submit()
+      }
+    }
+
+    function read(bNo) {
+      const formPostRead = document.querySelector('#formPostRead')
+      console.log('bNo: ' + bNo)
+
+      if (member != null) {
+        console.log('member: ', member.email)
+        formPostRead.email.value = member.email
+        formPostRead.bNo.value = bNo
+      } else {
+        console.log('member: ', 'guest')
+        formPostRead.email.value = 'guest'
+        formPostRead.bNo.value = bNo
+      }
+      formPostRead.submit()
     }
   </script>
 </html>

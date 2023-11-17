@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solmunity</title>
+    <link rel="stylesheet" href="/css/read.css" />
+    <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <%- include('header') %>
+    <div class="main">
+      <div class="read">
+        <div class="innerRead">
+          <div class="innerInfo">
+            <p>
+              Board
+              <span class="gt">></span>
+              Read
+            </p>
+            <p class="info">
+              <span id="nickname"
+                >작성자: <%= data.findedBoard.MEMBER.nickname %></span
+              ><span id="date"><%= data.date %></span>
+
+              <% if (data.writer) { %>
+              <span class="modifyAndRemove">
+                <span class="modify" onclick="modify()"> 수정 </span>
+                |
+                <span class="remove" onclick="remove()"> 삭제 </span>
+              </span>
+              <% } %>
+            </p>
+            <p id="title"><%= data.findedBoard.title %></p>
+            <p></p>
+            <p id="content"><%= data.findedBoard.content %></p>
+
+            <div class="reply">
+              <textarea></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form action="/board" method="post" name="formPostBoard" hidden>
+      <input type="text" name="rNo" />
+    </form>
+  </body>
+
+  <script>
+    const bNo = <%= data.findedBoard.bNo %>
+    async function modify() {
+      console.log(bNo)
+    }
+
+    async function remove() {
+      console.log(bNo)
+    }
+  </script>
+</html>

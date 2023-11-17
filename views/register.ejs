@@ -50,14 +50,14 @@
 
       const data = new FormData()
       data.append('title', form.title.value)
-      data.append('content', form.title.value)
-      //data.append('MEMBER_email', user.email)
+      data.append('content', form.content.value)
+      data.append('MEMBER_email', member.email)
       data.append('file', file.files[0])
 
       const respone = await axios({
         method: 'POST',
         data,
-        url: '/register/action',
+        url: '/board/register/action',
         headers: {
           'Content-Type': 'multipart/form-data',
         },

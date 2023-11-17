@@ -30,27 +30,5 @@
     </div>
   </body>
 
-  <script>
-    const noticeContent = document.querySelector('.noticeContent')
-    noticeContent.innerText = room.notice
-    const rTitle = document.querySelector('#rTitle')
-    rTitle.innerHTML = `${room.rTitle}`
-
-    // toggle
-    function toggleSections() {
-      if (replyText.style.display === 'none') {
-        replyText.style.display = 'block'
-      } else {
-        replyText.style.display = 'none'
-      }
-    }
-
-    //textarea 자동 높이 조절
-    const $textarea = document.querySelector('#notice')
-    $textarea.oninput = (event) => {
-      const $target = event.target
-      $target.style.height = 0
-      $target.style.height = 5 + $target.scrollHeight + 'px'
-    }
-  </script>
+  <script></script>
 </html>

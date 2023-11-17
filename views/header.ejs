@@ -28,10 +28,14 @@
       </div>
 
       <div class="innerHeaderLogo">
-        <img src="/img/home.svg" onclick="postIndex()" class="home" />
-        <img src="/img/board.svg" onclick="postBoard()" class="board" />
-        <img src="/img/graph.svg" onclick="postGraph()" class="graph" />
-        <img src="/img/profile.svg" onclick="postProfile()" class="profile" />
+        <img src="/img/home.svg" onclick="postIndex()" class="homeImg" />
+        <img src="/img/board.svg" onclick="postBoard()" class="boardImg" />
+        <img src="/img/graph.svg" onclick="postGraph()" class="graphImg" />
+        <img
+          src="/img/profile.svg"
+          onclick="postProfile()"
+          class="profileImg"
+        />
       </div>
     </div>
 
@@ -41,19 +45,16 @@
     <form action="/profile" method="post" name="formPostProfile" hidden></form>
   </body>
   <script>
-    const user = JSON.parse(localStorage.getItem('user'))
-    const userRole = localStorage.getItem('userRole')
-    console.log('user:', user)
-    console.log('userRole:', userRole)
+    const member = JSON.parse(localStorage.getItem('member'))
+    console.log('member:', member)
 
     window.addEventListener('load', checkLoginStatus())
 
     // 로그인 식별
     function checkLoginStatus() {
-      const token = localStorage.getItem('token')
       const innerHeaderLogin = document.querySelector('.innerHeaderLogin')
 
-      if (token) {
+      if (member != null) {
         // 토큰과 닉네임이 로컬 스토리지에 존재하는 경우
         // 로그인 상태로 판별하고 해당 닉네임을 사용
         innerHeaderLogin.innerText = '로그아웃'
@@ -67,16 +68,11 @@
 
           if (resData.logoutSuccess) {
             console.log('로그아웃 ok')
-            localStorage.removeItem('token')
-            localStorage.removeItem('user')
-            localStorage.removeItem('room')
-            localStorage.removeItem('nickname')
+            localStorage.removeItem('member')
             document.location.href = '/'
           }
         }
       } else {
-        // 토큰 또는 닉네임이 로컬 스토리지에 없는 경우
-        // 로그인 상태가 아니라고 판별하고 "Guest" 닉네임 사용
         innerHeaderLogin.innerText = '로그인'
         innerHeaderLogin.onclick = () => {
           window.location.href = '/signin'

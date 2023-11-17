@@ -18,11 +18,13 @@
   <body>
     <%- include('header') %>
     <div class="main">
-      <div class="codeSelect">
-        <button type="button" id="btnGenerate" onclick="generate()">
-          제어 흐름 그래프 생성하기
-        </button>
-        <input type="file" id="solCode" hidden />
+      <div class="graph">
+        <div class="innerGraph">
+          <button type="button" id="btnGenerate" onclick="generate()">
+            제어 흐름 그래프 생성하기
+          </button>
+          <input type="file" id="solCode" hidden />
+        </div>
       </div>
     </div>
   </body>

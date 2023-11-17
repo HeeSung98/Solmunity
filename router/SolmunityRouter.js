@@ -49,18 +49,26 @@ router.get('/board', getController.getBoard)
 
 router.post('/', postController.postIndex)
 
+router.post('/signin/action', postController.postSigninAction)
+
+router.post('/signup/action', postController.postSignupAction)
+
+router.post('/signout', postController.postSignout)
+
 router.post('/board', postController.postBoard)
+
+router.post('/board/register', postController.postBoardRegister)
+
+router.post('/board/read', postController.postBoardRead)
 
 router.post('/graph', postController.postGraph)
 
 router.post('/profile', postController.postProfile)
 
-router.post('/register', postController.postRegister)
-
 router.post(
-  '/register/action',
+  '/board/register/action',
   uploadBoard.single('file'),
-  postController.postRegisterAction
+  postController.postBoardRegisterAction
 )
 
 module.exports = router
