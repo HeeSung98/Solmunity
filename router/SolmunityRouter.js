@@ -61,6 +61,8 @@ router.post('/board/register', postController.postBoardRegister)
 
 router.post('/board/read', postController.postBoardRead)
 
+router.post('/board/modify', postController.postBoardModify)
+
 router.post('/graph', postController.postGraph)
 
 router.post('/profile', postController.postProfile)
@@ -70,5 +72,13 @@ router.post(
   uploadBoard.single('file'),
   postController.postBoardRegisterAction
 )
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ PATCH ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+router.patch('/board/modify/action', patchController.patchModfiyAction)
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ DELETE ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+router.delete('/board/read/remove', deleteController.deleteBoardRemove)
 
 module.exports = router

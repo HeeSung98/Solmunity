@@ -213,20 +213,23 @@ textarea {
 #table {
   font-size: 25px;
   width: 80vw;
-  text-align: left;
   border-spacing: 10px 20px;
+  text-align: center;
 }
 
 #no {
-  width: 10vw;
+  width: 5vw;
+  text-align: center;
 }
 
 #title {
   width: 40vw;
+  text-align: center;
 }
 
 #writer {
   width: 15vw;
+  text-align: center;
 }
 
 #regDate {

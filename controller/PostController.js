@@ -251,6 +251,45 @@ const postBoardRead = async (req, res) => {
   }
 }
 
+const postBoardModify = async (req, res) => {
+  console.log(
+    ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시물 수정 페이지 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
+  )
+  console.log('req.body:', req.body)
+
+  try {
+    const { bNo, email } = req.body
+
+    const findedBoard = await BOARD.findOne({
+      where: { bNo },
+
+      include: {
+        model: MEMBER,
+        required: false,
+        attributes: ['nickname'],
+      },
+    })
+    let date = findedBoard.createdAt
+    date =
+      date.getFullYear() +
+      '년 ' +
+      (date.getMonth() + 1) +
+      '월 ' +
+      date.getDate() +
+      '일 ' +
+      date.getHours() +
+      ':' +
+      (date.getMinutes() > 10 ? date.getMinutes() : date.getMinutes() + '0')
+
+    console.log('findedBoard: ', findedBoard)
+
+    res.render('modify', { data: { findedBoard, date, email } })
+  } catch (error) {
+    res.json({ result: false, message: String(error) })
+  }
+  res.render('modify')
+}
+
 const postGraph = (req, res) => {
   res.render('graph')
 }
@@ -301,6 +340,7 @@ module.exports = {
   postBoardRegister,
   postBoardRegisterAction,
   postBoardRead,
+  postBoardModify,
 
   postGraph,
 

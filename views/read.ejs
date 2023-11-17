@@ -51,19 +51,47 @@
       </div>
     </div>
 
-    <form action="/board" method="post" name="formPostBoard" hidden>
-      <input type="text" name="rNo" />
+    <form action="/board/modify" method="post" id="formPostBoardModify" hidden>
+      <input type="text" name="bNo" />
+      <input type="text" name="email" />
     </form>
+    <form action="/board" method="post" id="formPostBoard" hidden></form>
   </body>
 
   <script>
     const bNo = <%= data.findedBoard.bNo %>
-    async function modify() {
-      console.log(bNo)
+
+    function modify() {
+      const formPostBoardModify = document.querySelector('#formPostBoardModify')
+
+      formPostBoardModify.bNo.value = bNo
+      formPostBoardModify.submit()
     }
 
     async function remove() {
       console.log(bNo)
+      const data = { bNo }
+      if (confirm('정말 삭제하시겠습니까?')) {
+        const respone = await axios({
+          data,
+          method: 'DELETE',
+          url: '/board/read/remove',
+        })
+        const resData = respone.data
+        console.log(resData)
+
+        if(resData.result) {
+          alert(resData.message)
+          const formPostBoard = document.querySelector('#formPostBoard')
+          formPostBoard.submit()
+        }
+        else {
+          alert(resData.message)
+          return false
+        }
+      } else {
+        return false
+      }
     }
   </script>
 </html>

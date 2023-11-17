@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solmunity</title>
+    <link rel="stylesheet" href="/css/modify.css" />
+    <link rel="shortcut icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <%- include('header') %>
+    <div class="main">
+      <div class="modify">
+        <div class="innerModify">
+          <div class="innerInfo">
+            <p>
+              Board
+              <span class="gt">></span>
+              Read
+              <span class="gt">></span>
+              Modify
+            </p>
+            <p class="info">
+              <span id="nickname">
+                작성자: <%= data.findedBoard.MEMBER.nickname %>
+              </span>
+              <span id="date"><%= data.date %></span>
+            </p>
+            <textarea id="title"><%= data.findedBoard.title %></textarea>
+            <textarea id="content"><%= data.findedBoard.content %></textarea>
+            <p style="justify-content: center; display: flex">
+              <button class="btnModify" onclick="modify()">수정하기</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form action="/board/read" method="post" id="formPostRead" hidden>
+      <input type="text" name="bNo" />
+      <input type="text" name="email" />
+    </form>
+  </body>
+
+  <script>
+    const bNo = '<%= data.findedBoard.bNo %>'
+    const email = '<%= data.findedBoard.MEMBER_email %>'
+
+    async function modify() {
+      const title = document.querySelector('#title').value
+      const content = document.querySelector('#content').value
+
+      const data = {
+        bNo,
+        title,
+        content,
+      }
+
+      const respone = await axios({
+        method: 'PATCH',
+        data,
+        url: '/board/modify/action',
+      })
+      const resData = respone.data
+      console.log(resData)
+
+      if (resData.result) {
+        alert(resData.message)
+        const formPostRead = document.querySelector('#formPostRead')
+        formPostRead.bNo.value = bNo
+        formPostRead.email.value = email
+        formPostRead.submit()
+      }
+    }
+  </script>
+</html>
