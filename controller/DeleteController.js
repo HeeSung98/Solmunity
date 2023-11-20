@@ -25,7 +25,35 @@ const deleteBoardRemove = async (req, res) => {
   }
 }
 
-module.exports = { deleteBoardRemove }
+const deleteReplyRemove = async (req, res) => {
+  console.log(
+    ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 댓글 삭제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
+  )
+  console.log('req.body:', req.body)
+
+  try {
+    const { rNo, email } = req.body
+
+    const findedReply = await REPLY.findOne({ where: { rNo } })
+    console.log('findedReply: ', findedReply)
+
+    if (findedReply.MEMBER_email == email) {
+      await REPLY.destroy({ where: { rNo } })
+    } else {
+      throw new Error('잘못된 접근입니다.')
+    }
+
+    res.json({
+      result: true,
+      message: '댓글이 삭제되었습니다.',
+    })
+  } catch (error) {
+    console.log(error)
+    res.json({ result: false, message: String(error) })
+  }
+}
+
+module.exports = { deleteBoardRemove, deleteReplyRemove }
 
 const bcryptPassword = (password) => {
   return bcrypt.hash(password, 10)

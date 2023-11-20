@@ -30,7 +30,7 @@ const uploadBoard = multer({
       callback(null, { fieldName: file.fieldname })
     },
     key: function (req, file, callback) {
-      callback(null, 'room-' + Date.now().toString() + '-' + file.originalname)
+      callback(null, 'board-' + Date.now().toString() + '-' + file.originalname)
     },
   }),
 })
@@ -44,6 +44,8 @@ router.get('/signin', getController.getSignin)
 router.get('/signup', getController.getSignup)
 
 router.get('/board', getController.getBoard)
+
+router.get('/graph', getController.getGraph)
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ POST ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
@@ -63,15 +65,19 @@ router.post('/board/read', postController.postBoardRead)
 
 router.post('/board/modify', postController.postBoardModify)
 
+router.post('/board/reply/register', postController.postReplyRegister)
+
 router.post('/graph', postController.postGraph)
+
+router.post(
+  '/graph/action',
+  uploadBoard.single('file'),
+  postController.postGraphAction
+)
 
 router.post('/profile', postController.postProfile)
 
-router.post(
-  '/board/register/action',
-  uploadBoard.single('file'),
-  postController.postBoardRegisterAction
-)
+router.post('/board/register/action', postController.postBoardRegisterAction)
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ PATCH ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
@@ -80,5 +86,7 @@ router.patch('/board/modify/action', patchController.patchModfiyAction)
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ DELETE ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 router.delete('/board/read/remove', deleteController.deleteBoardRemove)
+
+router.delete('/board/reply/remove', deleteController.deleteReplyRemove)
 
 module.exports = router

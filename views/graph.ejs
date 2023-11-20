@@ -17,17 +17,74 @@
 
   <body>
     <%- include('header') %>
-    <div class="main">
-      <div class="graph">
-        <div class="innerGraph">
-          <button type="button" id="btnGenerate" onclick="generate()">
-            제어 흐름 그래프 생성하기
+    <div>
+      <button type="button" id="btnOpenModal">제어 흐름 그래프 생성하기</button>
+    </div>
+    <div><img id="imgGraph" src="" /></div>
+
+    <input type="file" id="file" hidden />
+
+    <div class="modal">
+      <div class="modalContent">
+        <div class="modalHeader">
+          <button id="btnClose">x</button>
+        </div>
+        <div class="modalBody">
+          <div class="modalBodyInfo">
+            <input id="name" placeholder="파일명을 입력해주세요." />
+            <textarea id="code" placeholder="코드를 입력해주세요."></textarea>
+          </div>
+        </div>
+        <div class="modalFooter">
+          <button id="btnGenerate" type="button" onclick="generate()">
+            변환하기
           </button>
-          <input type="file" id="solCode" hidden />
         </div>
       </div>
     </div>
   </body>
 
-  <script></script>
+  <script>
+    const email = member.email
+
+    const modal = document.querySelector('.modal')
+    const btnOpenModal = document.getElementById('btnOpenModal')
+    const btnClose = document.getElementById('btnClose')
+    const imgGraph = document.getElementById('imgGraph')
+
+    btnOpenModal.addEventListener('click', function () {
+      modal.style.display = 'block'
+    })
+
+    btnClose.addEventListener('click', function () {
+      modal.style.display = 'none'
+    })
+
+    async function generate() {
+      const data = {
+        name: document.querySelector('#name').value,
+        code: document.querySelector('#code').value,
+        email,
+      }
+
+      const respone = await axios({
+        method: 'POST',
+        data,
+        url: '/graph/action',
+      })
+      resData = respone.data
+      console.log(resData)
+
+      if (resData.result) {
+        alert(resData.message)
+        modal.style.display = 'none'
+        console.log('imgGraph ', imgGraph)
+        console.log('resData ', resData.data.path)
+        imgGraph.src = resData.data.path
+      } else {
+        alert(resData.message)
+        return
+      }
+    }
+  </script>
 </html>

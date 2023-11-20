@@ -82,6 +82,8 @@ body {
   font-size: 33px;
   outline-style: none;
   resize: none;
+  margin-bottom: 12px;
+  height: 35px;
 }
 
 #content {

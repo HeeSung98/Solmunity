@@ -126,13 +126,13 @@ const postBoard = async (req, res) => {
       (board) => board.dataValues.MEMBER.nickname
     )
     //게시물 작성일
-    const dateList = findedBoard.map((post) => {
-      const createdAt = new Date(post.dataValues.createdAt)
+    const dateList = findedBoard.map((board) => {
+      const createdAt = new Date(board.dataValues.createdAt)
       const now = new Date()
       const timeDiff = Math.floor((now - createdAt) / 1000) // 초 단위로 시간 차이 계산
 
       if (timeDiff < 60) {
-        return `${timeDiff}초 전`
+        return `1분 전`
       } else if (timeDiff < 3600) {
         const minutes = Math.floor(timeDiff / 60)
         return `${minutes}분 전`
@@ -162,7 +162,9 @@ const postBoardRegister = (req, res) => {
   console.log(
     ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시물 업로드 페이지 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
   )
-  res.render('register')
+  console.log('req.body:', req.body)
+
+  res.render('register', { data: req.body.email })
 }
 
 const postBoardRegisterAction = async (req, res) => {
@@ -186,7 +188,7 @@ const postBoardRegisterAction = async (req, res) => {
       const createdBoardImage = await BOARD_IMAGE.create({
         uuid: req.file.key,
         path: req.file.location,
-        BOARD_bNO: createdBoard.bNo,
+        BOARD_bNo: createdBoard.bNo,
       })
 
       console.log('createdBoardImage:', createdBoardImage)
@@ -208,6 +210,7 @@ const postBoardRead = async (req, res) => {
   try {
     const { bNo, email } = req.body
 
+    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시글 내용 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     const findedBoard = await BOARD.findOne({
       where: { bNo },
 
@@ -232,19 +235,121 @@ const postBoardRead = async (req, res) => {
       ':' +
       (date.getMinutes() > 10 ? date.getMinutes() : date.getMinutes() + '0')
 
+    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시글 이미지 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    const findedImage = await BOARD_IMAGE.findAll({
+      where: { BOARD_bNo: bNo },
+    })
+    console.log('findedImage: ', findedImage)
+
+    const imageList = findedImage.map((image) => image.dataValues.path)
+    console.log('imageList: ', imageList)
+
+    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시글 댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    const findedReply = await REPLY.findAll({
+      where: { BOARD_bNo: bNo },
+      include: [
+        {
+          model: MEMBER,
+          required: false,
+        },
+      ],
+    })
+    console.log('findedReply: ', findedReply)
+
+    //댓글 번호
+    const rNoList = findedReply.map((reply) => reply.dataValues.rNo)
+    //댓글 작성자 닉네임
+    const writerList = findedReply.map(
+      (reply) => reply.dataValues.MEMBER.nickname
+    )
+    //댓글 작성자 이메일
+    const emailList = findedReply.map((reply) => reply.dataValues.MEMBER_email)
+    //댓글 내용
+    const textList = findedReply.map((reply) => reply.dataValues.text)
+    //댓글 작성일
+    const dateList = findedReply.map((reply) => {
+      const createdAt = new Date(reply.dataValues.createdAt)
+      const now = new Date()
+      const timeDiff = Math.floor((now - createdAt) / 1000) // 초 단위로 시간 차이 계산
+
+      if (timeDiff < 60) {
+        return `1분 전`
+      } else if (timeDiff < 3600) {
+        const minutes = Math.floor(timeDiff / 60)
+        return `${minutes}분 전`
+      } else {
+        return createdAt.getMonth() + 1 + '월 ' + createdAt.getDate() + '일 '
+      }
+    })
+    console.log('rNoList: ' + rNoList)
+    console.log('writerList: ' + writerList)
+    console.log('emailList: ' + emailList)
+    console.log('textList: ' + textList)
+    console.log('dateList: ' + dateList)
+
     if (email == findedBoard.MEMBER_email) {
       console.log('작성자')
       res.render('read', {
         result: true,
-        data: { findedBoard, writer: true, date },
+        data: {
+          findedBoard,
+          writer: true,
+          date,
+          imageList,
+          rNoList,
+          writerList,
+          emailList,
+          textList,
+          dateList,
+          email,
+        },
       })
     } else {
       console.log('게스트')
       res.render('read', {
         result: true,
-        data: { findedBoard, writer: false, date },
+        data: {
+          findedBoard,
+          writer: false,
+          date,
+          imageList,
+          rNoList,
+          writerList,
+          emailList,
+          textList,
+          dateList,
+          emailList,
+          email,
+        },
       })
     }
+  } catch (error) {
+    console.log(error)
+    res.json({ result: false, message: String(error) })
+  }
+}
+
+const postReplyRegister = async (req, res) => {
+  console.log(
+    ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 댓글 등록 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
+  )
+  console.log('req.body:', req.body)
+
+  try {
+    const { bNo, email, text, nickname } = req.body
+
+    const createdReply = await REPLY.create({
+      BOARD_bNo: bNo,
+      MEMBER_email: email,
+      text,
+    })
+    console.log('createdReply:', createdReply)
+
+    res.json({
+      result: true,
+      message: '댓글 작성 성공',
+      data: { createdReply, nickname },
+    })
   } catch (error) {
     console.log(error)
     res.json({ result: false, message: String(error) })
@@ -258,7 +363,7 @@ const postBoardModify = async (req, res) => {
   console.log('req.body:', req.body)
 
   try {
-    const { bNo, email } = req.body
+    const { bNo } = req.body
 
     const findedBoard = await BOARD.findOne({
       where: { bNo },
@@ -282,8 +387,12 @@ const postBoardModify = async (req, res) => {
       (date.getMinutes() > 10 ? date.getMinutes() : date.getMinutes() + '0')
 
     console.log('findedBoard: ', findedBoard)
+    console.log(
+      'findedBoard.MEMBER.dataValues.nickname: ',
+      findedBoard.MEMBER.dataValues.nickname
+    )
 
-    res.render('modify', { data: { findedBoard, date, email } })
+    res.render('modify', { data: { findedBoard, date } })
   } catch (error) {
     res.json({ result: false, message: String(error) })
   }
@@ -299,26 +408,48 @@ const postGraphAction = async (req, res) => {
     ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ CFG 생성 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
   )
   console.log('req.body:', req.body)
-  console.log('req.file', req.file)
 
-  let image = []
+  const { name, code } = req.body
+  let std = ''
 
-  const python = spawn('python3', [
-    'graph.py',
-    req.file[0].originalname,
-    req.body.text,
-  ])
-  python.stdout.on('data', (data) => {
-    console.log(
-      ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ python start ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
-    )
-    console.log(`stdout : ${data}`)
-    console.log(
-      ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ python done ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
-    )
-  })
+  const runPython = async () => {
+    return new Promise((resolve, reject) => {
+      const python = spawn('python3', ['graph.py', name, code])
 
-  res.json({ result: true })
+      python.stdout.on('data', (data) => {
+        console.log('stdout:', `${data}`)
+        std += data.toString()
+      })
+
+      python.on('close', (code) => {
+        console.log('Python process exited with code', code)
+        resolve(std)
+      })
+
+      python.on('error', (err) => {
+        reject(err)
+      })
+    })
+  }
+
+  runPython()
+    .then((result) => {
+      let uuid = result.split('\n')[1]
+      let path = 'https://heesung-s3.s3.ap-northeast-2.amazonaws.com/' + uuid
+
+      res.json({
+        result: true,
+        message: '제어 흐름 그래프가 생성되었습니다.',
+        data: { uuid, path },
+      })
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+      res.json({
+        result: false,
+        message: String(error),
+      })
+    })
 }
 
 const postProfile = (req, res) => {
@@ -342,7 +473,10 @@ module.exports = {
   postBoardRead,
   postBoardModify,
 
+  postReplyRegister,
+
   postGraph,
+  postGraphAction,
 
   postProfile,
 }

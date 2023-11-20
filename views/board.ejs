@@ -31,11 +31,9 @@
         <button id="btnRegister" type="button" onclick="register()">
           게시글 작성
         </button>
-        <form
-          id="formPostRegister"
-          action="/board/register"
-          method="post"
-        ></form>
+        <form id="formPostRegister" action="/board/register" method="post">
+          <input type="text" name="email" hidden />
+        </form>
       </div>
 
       <div class="board">
@@ -72,6 +70,7 @@
         window.location.href = '/signin'
       } else {
         const formPostRegister = document.querySelector('#formPostRegister')
+        formPostRegister.email.value = member.email
         formPostRegister.submit()
       }
     }

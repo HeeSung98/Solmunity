@@ -8,6 +8,12 @@ body {
   margin: 0;
 }
 
+hr {
+  width: 100%;
+  border: solid 0.5px lightgray;
+  margin: 15px 0;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -62,7 +68,7 @@ body {
 }
 
 .modifyAndRemove {
-  display: inline-block;
+  display: block;
   float: right;
   color: rgb(111, 107, 107);
 }
@@ -83,12 +89,76 @@ body {
   font-size: 33px;
   outline-style: none;
   resize: none;
+  margin-bottom: 12px;
+  height: 35px;
 }
 
 #content {
+  margin-top: 0px;
   border: 0;
-  height: 40vh;
+  min-height: 40vh;
   font-size: 20px;
   outline-style: none;
   resize: none;
+}
+
+.divReply {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  height: 45px;
+  border: 1px solid gray;
+}
+
+#textareaReply {
+  font-size: 15px;
+  outline-style: none;
+  width: 90%;
+  resize: none;
+  height: 20px;
+  border-style: none;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+#btnReply {
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  cursor: pointer;
+  height: 30px;
+  background: lightgray;
+  border-radius: 10px;
+  border: 0;
+  margin-right: 5px;
+}
+
+.divReplies {
+  margin: 20px 0;
+}
+
+.replyWriter {
+  display: inline-block;
+  margin-left: 10px;
+  width: 15%;
+}
+
+.replyText {
+  display: inline-block;
+  width: 65%;
+}
+
+.replyDate {
+  float: right;
+  display: block;
+  margin-right: 10px;
+}
+
+.imgDel {
+  margin-left: 5px;
+  width: 16px;
+}
+
+.imgDel:hover {
+  cursor: pointer;
 }

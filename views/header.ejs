@@ -28,9 +28,9 @@
       </div>
 
       <div class="innerHeaderLogo">
-        <img src="/img/home.svg" onclick="postIndex()" class="homeImg" />
-        <img src="/img/board.svg" onclick="postBoard()" class="boardImg" />
-        <img src="/img/graph.svg" onclick="postGraph()" class="graphImg" />
+        <a href="/"><img src="/img/home.svg" class="homeImg" /></a>
+        <a href="/board"><img src="/img/board.svg" class="boardImg" /></a>
+        <a href="/graph"><img src="/img/graph.svg" class="graphImg" /></a>
         <img
           src="/img/profile.svg"
           onclick="postProfile()"
@@ -39,9 +39,6 @@
       </div>
     </div>
 
-    <form action="/" method="post" name="formPostIndex" hidden></form>
-    <form action="/board" method="post" name="formPostBoard" hidden></form>
-    <form action="/graph" method="post" name="formPostGraph" hidden></form>
     <form action="/profile" method="post" name="formPostProfile" hidden></form>
   </body>
   <script>
@@ -80,21 +77,6 @@
       }
     }
 
-    //메인페이지로 이동
-    function postIndex() {
-      const postIndexFrom = document.forms['formPostIndex'] // 방 페이지 이동을 위한 히든 폼
-      postIndexFrom.submit()
-    }
-    //게시판으로 이동
-    function postBoard() {
-      const formPostBoard = document.forms['formPostBoard'] // 게시글 호출을 위한 히든 폼
-      formPostBoard.submit()
-    }
-    //그래프로 이동
-    function postGraph() {
-      const formPostGraph = document.forms['formPostGraph'] // 게시글 호출을 위한 히든 폼
-      formPostGraph.submit()
-    }
     //프로필로 이동
     function postProfile() {
       const formPostProfile = document.forms['formPostProfile'] // 게시글 호출을 위한 히든 폼

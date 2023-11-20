@@ -1,7 +1,9 @@
 import sys
+import os
 import graphviz
 import boto3
 from solidity_parser import parser
+from time import time
 
 
 def s3_connection():
@@ -435,28 +437,33 @@ def solidity_to_ast(solidity_code):
 
 
 def generate(file_name, solidity_code):
-    file_name = file_name.split('.')[0]
-
     try:
-
         ast = solidity_to_ast(solidity_code)
         viz_code = ast_to_cfg(ast)
 
         cfg = graphviz.Source(viz_code)
         cfg.format = 'png'
 
+        current_time = str(time()).split('.')[0]
+        file_name = "CFG-" + current_time + "-" + file_name
+
         s3 = s3_connection()
         try:
             s3.upload_file(
-                cfg.render(filename=file_name),
-                "heesung-s3", file_name + '.png')
+                cfg.render(filename='./graph_result/' + file_name),
+                "heesung-s3", file_name)
         except Exception as e:
-            print(e)
+            return e
+        
+        print(file_name)
+        os.remove('./graph_result/' + file_name)
+        os.remove('./graph_result/' + file_name + '.png')
 
         return viz_code
 
     except Exception as e:
-        print(str(e))
+        return e
+    
 
 # ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 

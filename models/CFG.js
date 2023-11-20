@@ -1,10 +1,10 @@
 const { DataTypes } = require('sequelize')
 
-const BOARD_IMAGE = (sequelize) => {
+const CFG = (sequelize) => {
   return sequelize.define(
-    'BOARD_IMAGE',
+    'CFG',
     {
-      iNo: {
+      cNo: {
         type: DataTypes.BIGINT(20),
         primaryKey: true,
         autoIncrement: true,
@@ -24,4 +24,4 @@ const BOARD_IMAGE = (sequelize) => {
   )
 }
 
-module.exports = BOARD_IMAGE
+module.exports = CFG

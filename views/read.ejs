@@ -22,15 +22,17 @@
         <div class="innerRead">
           <div class="innerInfo">
             <p>
-              Board
+              <span class="b">
+                <a href="/board" style="text-decoration: none">Board</a>
+              </span>
               <span class="gt">></span>
               Read
             </p>
             <p class="info">
-              <span id="nickname"
-                >작성자: <%= data.findedBoard.MEMBER.nickname %></span
-              ><span id="date"><%= data.date %></span>
-
+              <span id="nickname">
+                작성자: <%= data.findedBoard.MEMBER.nickname %>
+              </span>
+              <span id="date"><%= data.date %></span>
               <% if (data.writer) { %>
               <span class="modifyAndRemove">
                 <span class="modify" onclick="modify()"> 수정 </span>
@@ -40,11 +42,44 @@
               <% } %>
             </p>
             <p id="title"><%= data.findedBoard.title %></p>
-            <p></p>
-            <p id="content"><%= data.findedBoard.content %></p>
+            <hr style="margin-left: 0; width: 15%; border: 1.5px black solid" />
+            <div id="content">
+              <div class="divImage">
+                <% for(let i = data.imageList.length - 1; i >= 0; i--) { %>
+                <img src="<%= data.imageList[i] %>" />
+                <% } %>
+              </div>
+              <%= data.findedBoard.content %>
+            </div>
+            <div class="divReply">
+              <textarea
+                type="text"
+                id="textareaReply"
+                placeholder="댓글을 작성해주세요."
+              ></textarea>
+              <button type="button" onclick="replyRegister()" id="btnReply">
+                등록
+              </button>
+            </div>
+            <div class="divReplies">
+              <% for(let i = data.rNoList.length - 1; i >= 0 ; i--) { %>
+              <span class="replyWriter"><%= data.writerList[i] %></span>
+              <span class="replyText">
+                <%= data.textList[i] %>
+                <!-- 댓글 작성자만 삭제할 수 있도록 -->
+                <% if(data.emailList[i] == data.email) {%>
+                <img
+                  src="/img/delete.png"
+                  class="imgDel"
+                  onclick="replyRemove(<%= data.rNoList[i] %>)"
+                />
+                <% } %></span
+              >
 
-            <div class="reply">
-              <textarea></textarea>
+              <span class="replyDate"><%= data.dateList[i] %></span>
+              <% if(i != 0) { %>
+              <hr />
+              <% } %> <% } %>
             </div>
           </div>
         </div>
@@ -59,6 +94,8 @@
   </body>
 
   <script>
+    console.log('<%= data.imageList[0] %>');
+    const email = member.email
     const bNo = <%= data.findedBoard.bNo %>
 
     function modify() {
@@ -71,7 +108,7 @@
     async function remove() {
       console.log(bNo)
       const data = { bNo }
-      if (confirm('정말 삭제하시겠습니까?')) {
+      if (confirm('게시글을 삭제하시겠습니까?')) {
         const respone = await axios({
           data,
           method: 'DELETE',
@@ -80,17 +117,69 @@
         const resData = respone.data
         console.log(resData)
 
-        if(resData.result) {
+        if (resData.result) {
           alert(resData.message)
           const formPostBoard = document.querySelector('#formPostBoard')
           formPostBoard.submit()
-        }
-        else {
+        } else {
           alert(resData.message)
           return false
         }
       } else {
         return false
+      }
+    }
+
+    async function replyRegister() {
+      const data = {
+        bNo,
+        email: member.email,
+        text: document.querySelector('#textareaReply').value,
+      }
+      console.log('data: ', data)
+
+      const respone = await axios({
+        data,
+        method: 'POST',
+        url: '/board/reply/register',
+      })
+      const resData = respone.data
+      console.log('resData: ', resData)
+
+      if (resData.result) {
+        alert(resData.message)
+        location.reload()
+      } else {
+        alert(resData.message)
+        location.reload()
+      }
+    }
+
+    async function replyRemove(rNo) {
+      if (confirm('댓글을 삭제하시겠습니까?')) {
+        const data = {
+          rNo,
+          email: member.email,
+        }
+        console.log('data: ', data)
+
+        const respone = await axios({
+          data,
+          method: 'DELETE',
+          url: '/board/reply/remove',
+        })
+        const resData = respone.data
+        console.log('resData: ', resData)
+
+        if (resData.result) {
+          alert(resData.message)
+          location.reload()
+        } else {
+          alert(resData.message)
+          location.reload()
+        }
+      } else {
+        return
       }
     }
   </script>

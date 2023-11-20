@@ -23,6 +23,7 @@ db.MEMBER = require('./Member')(sequelize)
 db.BOARD = require('./Board')(sequelize)
 db.BOARD_IMAGE = require('./BoardImage')(sequelize)
 db.REPLY = require('./Reply')(sequelize)
+db.CFG = require('./CFG')(sequelize)
 
 // 멤버와 게시물의 연관관계
 db.MEMBER.hasMany(db.BOARD, {
@@ -66,6 +67,17 @@ db.BOARD.hasMany(db.BOARD_IMAGE, {
 db.BOARD_IMAGE.belongsTo(db.BOARD, {
   foreignKey: 'BOARD_bNo',
   sourceKey: 'bNo',
+})
+
+//멤버와 CFG의 연관관계
+db.MEMBER.hasMany(db.CFG, {
+  foreignKey: 'MEMBER_email',
+  sourceKey: 'email',
+  onDelete: 'CASCADE',
+})
+db.CFG.belongsTo(db.MEMBER, {
+  foreignKey: 'MEMBER_email',
+  sourceKey: 'email',
 })
 
 db.sequelize = sequelize

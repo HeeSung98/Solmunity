@@ -19,32 +19,44 @@
     <%- include('header') %>
     <div class="main">
       <div class="register">
-        <div class="title">게시글 작성하기</div>
         <div class="innerRegister">
           <div class="innerInfo">
+            <p>
+              <a href="/board" style="text-decoration: none">Board</a>
+              <span class="gt">></span>
+              Register
+            </p>
+            <p class="info">
+              <span id="nickname"> 작성자: <%= data %> </span>
+              <span id="date"><%= data.date %></span>
+            </p>
             <form id="formPostAction">
-              <input type="text" id="writer" hidden />
-              <textarea id="title" placeholder="제목"></textarea>
-              <textarea id="content" placeholder="내용"></textarea><br />
-              <input type="file" id="file" /><br /><br />
-              <button id="registerBtn" type="button" onclick="boardRegister()">
-                제출
-              </button>
+              <textarea
+                id="title"
+                placeholder="제목을 입력해주세요."
+              ></textarea>
+              <hr
+                style="margin-left: 0; width: 15%; border: 1.5px black solid"
+              />
+              <textarea
+                id="content"
+                placeholder="본문을 작성해주세요."
+              ></textarea>
+              <input type="file" id="file" />
+              <p style="justify-content: center; display: flex">
+                <button type="button" class="btnRegister" onclick="register()">
+                  게시하기
+                </button>
+              </p>
             </form>
           </div>
         </div>
       </div>
     </div>
-
-    <form action="/board" method="post" name="formPostBoard" hidden>
-      <input type="text" name="rNo" />
-    </form>
   </body>
 
   <script>
-    const boardForm = document.forms['formPostBoard']
-
-    async function boardRegister() {
+    async function register() {
       const form = document.forms['formPostAction']
       const file = document.querySelector('#file')
 
@@ -67,9 +79,11 @@
 
       if (resData.result) {
         alert(resData.message)
-        boardForm.submit()
+        location.href = '/board'
       } else {
         console.log('err:', resData.error)
+        alert(resData.message)
+        location.reload()
       }
     }
   </script>

@@ -22,9 +22,13 @@
         <div class="innerModify">
           <div class="innerInfo">
             <p>
-              Board
+              <a href="/board" style="text-decoration: none">Board</a>
               <span class="gt">></span>
-              Read
+              <a
+                href="/board/read?bNo=<%= data.findedBoard.bNo%>"
+                style="text-decoration: none"
+                >Read</a
+              >
               <span class="gt">></span>
               Modify
             </p>
@@ -35,6 +39,7 @@
               <span id="date"><%= data.date %></span>
             </p>
             <textarea id="title"><%= data.findedBoard.title %></textarea>
+            <hr style="margin-left: 0; width: 15%; border: 1.5px black solid" />
             <textarea id="content"><%= data.findedBoard.content %></textarea>
             <p style="justify-content: center; display: flex">
               <button class="btnModify" onclick="modify()">수정하기</button>

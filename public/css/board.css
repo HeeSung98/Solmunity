@@ -64,7 +64,7 @@ body {
   margin-left: 75%;
   margin-top: 2%;
   margin-bottom: 2%;
-  background-color: skyblue;
+  background-color: lightgray;
   color: black;
   border-radius: 10px;
   border: 0;
@@ -132,12 +132,6 @@ hr {
   height: 100%;
 }
 
-.img_del,
-#commentBtn,
-#likeBtn {
-  width: 40px;
-  padding: 5px;
-}
 .innerContent {
   width: 100%;
 }
@@ -191,19 +185,6 @@ textarea {
   padding-left: 7px;
 }
 
-#replyBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  cursor: pointer;
-  height: 30px;
-  margin: 5px 0px;
-  background: rgb(234, 244, 78);
-  border-radius: 10px;
-  border: 0;
-}
-
 .btn img {
   width: 10px;
   height: 10px;
@@ -239,5 +220,9 @@ textarea {
 
 .tableBody:hover {
   color: rgb(102, 172, 200);
+  cursor: pointer;
+}
+
+.b:hover {
   cursor: pointer;
 }
