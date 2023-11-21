@@ -23,6 +23,7 @@ body {
 
 .divSearch {
   display: flex;
+  position: relative;
   width: 100%;
   flex-direction: column;
   margin-top: 20px;
@@ -30,14 +31,7 @@ body {
   height: 50px;
 }
 
-.formSearch {
-  display: relative;
-  justify-content: center;
-  height: 50px;
-  line-height: 50px;
-}
-
-.text {
+.keyword {
   position: relative;
   width: 40vw;
   height: 35px;

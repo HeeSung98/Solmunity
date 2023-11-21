@@ -2,6 +2,7 @@ import sys
 import os
 import graphviz
 import boto3
+from pathlib import Path
 from solidity_parser import parser
 from time import time
 
@@ -450,14 +451,14 @@ def generate(file_name, solidity_code):
         s3 = s3_connection()
         try:
             s3.upload_file(
-                cfg.render(filename=file_name),
+                cfg.render(filename=str(Path.cwd()) + '/graph_result' + file_name),
                 "heesung-s3", file_name)
         except Exception as e:
             print(e) 
         
         print(file_name)
-        os.remove(file_name)
-        os.remove(file_name + '.png')
+        os.remove(str(Path.cwd()) + '/graph_result' + file_name)
+        os.remove(str(Path.cwd()) + '/graph_result' + file_name + '.png')
 
         return viz_code
 
