@@ -77,7 +77,11 @@ router.post(
 
 router.post('/profile', postController.postProfile)
 
-router.post('/board/register/action', postController.postBoardRegisterAction)
+router.post(
+  '/board/register/action',
+  uploadBoard.single('file'),
+  postController.postBoardRegisterAction
+)
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ PATCH ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
