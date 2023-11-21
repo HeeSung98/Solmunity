@@ -31,10 +31,12 @@ body {
 }
 
 .keyword {
+  padding-left: 15px;
   position: relative;
   width: 40vw;
   height: 35px;
   border-radius: 90px;
+  font-size: 20px;
 }
 
 .search {

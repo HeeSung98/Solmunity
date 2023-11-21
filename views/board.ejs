@@ -60,6 +60,11 @@
   <script>
     const btnRegister = document.querySelector('#btnRegister')
 
+    async function search() {
+      const keyword = document.querySelector('.keyword').value
+      console.log(keyword)
+    }
+
     function register() {
       if (member == null) {
         alert('로그인 후 글을 작성할 수 있습니다')
