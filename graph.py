@@ -449,14 +449,11 @@ def generate(file_name, solidity_code):
         file_name = "CFG-" + current_time + "-" + file_name
 
         s3 = s3_connection()
-        try:
-            s3.upload_file(
-                cfg.render(filename=file_name),
-                "heesung-s3", file_name)
-        except Exception as e:
-            print(e) 
-        
+        s3.upload_file(
+            cfg.render(filename=file_name),
+            "heesung-s3", file_name)
         print(file_name)
+        
 
         return viz_code
 
