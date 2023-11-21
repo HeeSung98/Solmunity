@@ -450,14 +450,14 @@ def generate(file_name, solidity_code):
         s3 = s3_connection()
         try:
             s3.upload_file(
-                cfg.render(filename='./graph_result/' + file_name),
+                cfg.render(filename=file_name),
                 "heesung-s3", file_name)
         except Exception as e:
             print(e) 
         
         print(file_name)
-        os.remove('./graph_result/' + file_name)
-        os.remove('./graph_result/' + file_name + '.png')
+        os.remove(file_name)
+        os.remove(file_name + '.png')
 
         return viz_code
 
