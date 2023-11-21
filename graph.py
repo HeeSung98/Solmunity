@@ -453,7 +453,7 @@ def generate(file_name, solidity_code):
                 cfg.render(filename='./graph_result/' + file_name),
                 "heesung-s3", file_name)
         except Exception as e:
-            return e
+            print(e) 
         
         print(file_name)
         os.remove('./graph_result/' + file_name)
@@ -462,7 +462,7 @@ def generate(file_name, solidity_code):
         return viz_code
 
     except Exception as e:
-        return e
+        print(e)
     
 
 # ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
