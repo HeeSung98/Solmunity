@@ -2,6 +2,7 @@ html,
 body {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
+  flex-direction: column;
 }
 
 body {
@@ -101,7 +102,6 @@ input {
   width: 50%;
   height: 50px;
   margin-bottom: 10px;
-  /* background: rgb(234, 244, 78); */
   background: skyblue;
   border-radius: 10px;
   border: 0;

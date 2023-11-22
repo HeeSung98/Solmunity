@@ -39,7 +39,9 @@
       </div>
     </div>
 
-    <form action="/profile" method="post" name="formPostProfile" hidden></form>
+    <form action="/profile" method="post" name="formPostProfile" hidden>
+      <input type="text" name="email" />
+    </form>
   </body>
   <script>
     const member = JSON.parse(localStorage.getItem('member'))
@@ -79,8 +81,13 @@
 
     //프로필로 이동
     function postProfile() {
-      const formPostProfile = document.forms['formPostProfile'] // 게시글 호출을 위한 히든 폼
-      formPostProfile.submit()
+      if (member) {
+        const formPostProfile = document.forms['formPostProfile']
+        formPostProfile.email.value = member.email
+        formPostProfile.submit()
+      } else {
+        window.location.href = '/signin'
+      }
     }
   </script>
 </html>

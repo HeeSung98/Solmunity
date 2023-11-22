@@ -21,7 +21,7 @@ aws.config.update({
 
 const s3 = new aws.S3()
 
-const uploadBoard = multer({
+const upload = multer({
   storage: multerS3({
     s3,
     bucket: process.env.S3_BUCKET,
@@ -59,7 +59,15 @@ router.post('/signout', postController.postSignout)
 
 router.post('/board', postController.postBoard)
 
+router.post('/board/search', postController.postBoardSearch)
+
 router.post('/board/register', postController.postBoardRegister)
+
+router.post(
+  '/board/register/action',
+  upload.single('file'),
+  postController.postBoardRegisterAction
+)
 
 router.post('/board/read', postController.postBoardRead)
 
@@ -71,21 +79,19 @@ router.post('/graph', postController.postGraph)
 
 router.post(
   '/graph/action',
-  uploadBoard.single('file'),
+  upload.single('file'),
   postController.postGraphAction
 )
 
 router.post('/profile', postController.postProfile)
 
-router.post(
-  '/board/register/action',
-  uploadBoard.single('file'),
-  postController.postBoardRegisterAction
-)
+router.post('/profile/password', postController.postProfilePassword)
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ PATCH ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-router.patch('/board/modify/action', patchController.patchModfiyAction)
+router.patch('/board/modify/action', patchController.patchBoardModify)
+
+router.patch('/profile/modify', patchController.patchProfileModify)
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ DELETE ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 

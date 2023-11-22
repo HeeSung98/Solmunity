@@ -21,6 +21,9 @@ const getSignup = (req, res) => {
 }
 
 const getBoard = async (req, res) => {
+  console.log(
+    ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시물 불러오기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
+  )
   console.log('req.body:', req.body)
 
   try {

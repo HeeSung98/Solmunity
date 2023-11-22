@@ -16,15 +16,28 @@ body {
   margin-top: 60px;
 }
 
+.divHeader {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+}
 #btnOpenModal {
   width: 30%;
   height: 50px;
   background: lightgray;
-  border-radius: 20px;
+  border-radius: 30px;
   border: 0;
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.divGraph {
+  margin-top: 10px;
+  width: 100%;
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 모달 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */

@@ -19,8 +19,11 @@
     <%- include('header') %>
     <div class="main">
       <div class="divSearch">
-        <input type="text" class="keyword" />
-        <img src="/img/search.svg" onclick="search()" class="search" />
+        <form id="formPostSearch" action="/board/search" method="post">
+          <input type="text" class="keyword" name="keyword" />
+          <img src="/img/search.svg" onclick="search()" class="search" />
+          <input type="text" name="email" hidden />
+        </form>
       </div>
 
       <div class="register">
@@ -60,9 +63,10 @@
   <script>
     const btnRegister = document.querySelector('#btnRegister')
 
-    async function search() {
-      const keyword = document.querySelector('.keyword').value
-      console.log(keyword)
+    function search() {
+      const formPostSearch = document.querySelector('#formPostSearch')
+      formPostSearch.email.value = member.email
+      formPostSearch.submit()
     }
 
     function register() {

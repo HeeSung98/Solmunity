@@ -17,7 +17,7 @@
       </form>
       <div class="content">
         <div class="logoDiv">
-          <img id="logo" src="/img/logo.png" alt="logo" />
+          <img id="logo" src="/img/logo.png" alt="logo" onclick="index()" />
         </div>
         <div class="loginDiv">
           <form id="formSigninAction">
@@ -44,6 +44,9 @@
   </body>
 
   <script>
+    function index() {
+      location.href = '/'
+    }
     async function signin() {
       let form = document.forms['formSigninAction']
       const email = form.email.value
@@ -73,7 +76,7 @@
         form.submit()
       } else {
         alert(`${resData.message}`)
-        document.location.reload()
+        return
       }
     }
   </script>

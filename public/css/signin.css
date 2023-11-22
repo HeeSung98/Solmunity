@@ -41,6 +41,9 @@ body {
   width: 100%;
   height: 80%;
 }
+#logo:hover {
+  cursor: pointer;
+}
 
 .loginDiv {
   display: flex;

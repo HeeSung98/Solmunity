@@ -17,8 +17,180 @@
 
   <body>
     <%- include('header') %>
-    <div class="main"></div>
+    <div class="main">
+      <div class="profile">
+        <p id="greeting"><%= data.member.nickname %> 님 반갑습니다!</p>
+        <p id="info">회원 정보 수정하기</p>
+        <div class="divLine">
+          <label for="nickname">닉네임</label>
+          <input
+            class="inputModify"
+            type="text"
+            id="nickname"
+            placeholder="변경할 닉네임을 입력해주세요."
+          />
+          <button type="button" class="btnModify" onclick="modifyNickname()">
+            변경하기
+          </button>
+        </div>
+        <div class="divLine" divLine>
+          <label for="password">비밀번호</label>
+          <input
+            type="password"
+            id="password"
+            class="inputModify"
+            placeholder="현재 비밀번호를 입력해주세요."
+          />
+          <button type="button" class="btnModify" id="btnOpenModal">
+            변경하기
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal">
+      <div class="modalContent">
+        <div class="modalHeader">
+          <button id="btnClose">닫기</button>
+        </div>
+        <div class="modalBody">
+          <div class="divLine" divLine>
+            <input
+              type="password"
+              id="changePassword"
+              class="inputModifyModal"
+              placeholder="변경할 비밀번호를 입력해주세요."
+            />
+          </div>
+          <div class="divLine" divLine>
+            <input
+              type="password"
+              id="changePasswordTest"
+              class="inputModifyModal"
+              placeholder="변경할 비밀번호를 다시 입력해주세요."
+            />
+          </div>
+
+          <div class="divLine" divLine>
+            <button
+              type="button"
+              class="btnModifyModal"
+              onclick="modifyPassword()"
+            >
+              변경하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 
-  <script></script>
+  <script>
+    const nicknameRegex = /^[a-zA-Z가-힣\d]{1,10}$/
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,}$/
+    let prevent
+
+    async function modifyNickname() {
+      if (!nicknameRegex.test(nickname.value)) {
+        alert('닉네임은 1자 이상, 10자 이하로 입력해 주세요.')
+        return false
+      }
+
+      const data = {
+        email: member.email,
+        type: 'nickname',
+        nickname: document.querySelector('#nickname').value,
+      }
+      console.log('data: ', data)
+
+      const respone = await axios({
+        method: 'PATCH',
+        url: '/profile/modify',
+        data,
+      })
+      resData = respone.data
+      console.log(resData)
+
+      if (resData.result) {
+        alert(resData.message)
+        localStorage.setItem('member', JSON.stringify(resData.member))
+        location.reload()
+      } else {
+        console.log('err:', resData.error)
+        alert(resData.message)
+      }
+    }
+
+    btnOpenModal = document.getElementById('btnOpenModal')
+    modal = document.querySelector('.modal')
+
+    btnOpenModal.addEventListener('click', async function () {
+      const data = {
+        email: member.email,
+        type: 'password',
+        password: document.querySelector('#password').value,
+      }
+
+      const respone = await axios({
+        method: 'POST',
+        url: '/profile/password',
+        data,
+      })
+      resData = respone.data
+      console.log(resData)
+
+      if (resData.result) {
+        modal.style.display = 'block'
+        prevent = 'ok'
+      } else {
+        console.log('err:', resData.error)
+        alert(resData.message)
+      }
+    })
+
+    btnClose.addEventListener('click', function () {
+      modal.style.display = 'none'
+    })
+
+    async function modifyPassword() {
+      const data = {
+        email: member.email,
+        type: 'password',
+        password: document.querySelector('#changePassword').value,
+        prevent,
+      }
+
+      if (!passwordRegex.test(data.password)) {
+        alert(
+          '비밀번호는 최소 8자 이상이어야 하며, 영어, 숫자, 특수문자를 포함해야 합니다.'
+        )
+        return false
+      }
+
+      if (
+        data.password == document.querySelector('#changePasswordTest').value
+      ) {
+      } else {
+        alert('비밀번호가 일치하지 않습니다!')
+      }
+
+      const respone = await axios({
+        method: 'PATCH',
+        url: '/profile/modify',
+        data,
+      })
+      resData = respone.data
+      console.log(resData)
+
+      if (resData.result) {
+        alert(resData.message)
+        localStorage.setItem('member', JSON.stringify(resData.member))
+        location.reload()
+      } else {
+        console.log('err:', resData.error)
+        alert(resData.message)
+      }
+    }
+  </script>
 </html>

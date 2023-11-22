@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <%- include('header') %>
     <div class="main">
       <div class="content">
         <div class="signUpDiv">
@@ -21,7 +22,7 @@
               <input
                 type="email"
                 id="email"
-                placeholder="이메일"
+                placeholder="이메일 형식으로 작성해주세요."
                 minlength="5"
                 maxlength="50"
                 required
@@ -31,7 +32,7 @@
               <input
                 type="password"
                 id="password"
-                placeholder="비밀번호"
+                placeholder="최소 8자 이상이어야 하며, 영어, 숫자, 특수문자를 포함해야 합니다"
                 minlength="6"
                 maxlength="20"
                 required

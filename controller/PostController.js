@@ -31,6 +31,7 @@ const postSigninAction = async (req, res) => {
 
     if (!member) {
       res.json({ result: false, message: '사용자가 존재하지 않습니다' })
+      return
     }
 
     // 비밀번호 확인
@@ -155,6 +156,91 @@ const postBoard = async (req, res) => {
     })
   } catch (error) {
     console.log(error)
+    res.json({ result: false, error: String(error) })
+  }
+}
+
+const postBoardSearch = async (req, res) => {
+  console.log(
+    ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시물 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
+  )
+  console.log('req.body:', req.body)
+
+  try {
+    const { email, keyword } = req.body
+
+    const searchedBoard = await BOARD.findAll({
+      where: {
+        [sequelize.Op.or]: [
+          {
+            title: {
+              [sequelize.Op.like]: `%${keyword}%`, // 제목 검색
+            },
+          },
+          {
+            '$MEMBER.nickname$': {
+              [sequelize.Op.like]: `%${keyword}%`, // 작성자 검색
+            },
+          },
+          {
+            content: {
+              [sequelize.Op.like]: `%${keyword}%`, // 제목 검색
+            },
+          },
+        ],
+      },
+      include: [
+        {
+          model: BOARD_IMAGE, // join할 모델
+          required: false, // outer join으로 설정
+        },
+        {
+          model: MEMBER,
+          required: false,
+        },
+      ],
+    })
+    console.log('searchedBoard: ', searchedBoard)
+
+    //게시물 번호
+    const bNoList = searchedBoard.map((board) => board.dataValues.bNo)
+    //게시물 제목
+    const titleList = searchedBoard.map((board) => board.dataValues.title)
+    //게시물 작성자
+    const writerList = searchedBoard.map(
+      (board) => board.dataValues.MEMBER.nickname
+    )
+    //게시물 작성일
+    const dateList = searchedBoard.map((board) => {
+      const createdAt = new Date(board.dataValues.createdAt)
+      const now = new Date()
+      const timeDiff = Math.floor((now - createdAt) / 1000) // 초 단위로 시간 차이 계산
+
+      if (timeDiff < 60) {
+        return `1분 전`
+      } else if (timeDiff < 3600) {
+        const minutes = Math.floor(timeDiff / 60)
+        return `${minutes}분 전`
+      } else {
+        return createdAt.getMonth() + 1 + '월 ' + createdAt.getDate() + '일 '
+      }
+    })
+    console.log('bNoList:', bNoList)
+    console.log('titleList:', titleList)
+    console.log('writerList:', writerList)
+    console.log('dateList:', dateList)
+
+    res.render('board', {
+      data: {
+        bNoList,
+        titleList,
+        writerList,
+        dateList,
+      },
+    })
+  } catch (error) {
+    console.log(error)
+    res.json({ result: false, error: String(error) })
   }
 }
 
@@ -452,8 +538,50 @@ const postGraphAction = async (req, res) => {
     })
 }
 
-const postProfile = (req, res) => {
-  res.render('profile')
+const postProfile = async (req, res) => {
+  console.log(
+    ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 프로필 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
+  )
+  console.log('req.body:', req.body)
+  const { email } = req.body
+
+  try {
+    const findedMember = await MEMBER.findOne({
+      where: { email },
+    })
+    console.log('findedMember: ', findedMember)
+
+    res.render('profile', { data: { result: true, member: findedMember } })
+  } catch (error) {
+    console.log(error)
+    res.render('index', { data: { result: false, message: String(error) } })
+  }
+}
+
+const postProfilePassword = async (req, res) => {
+  console.log(
+    ' ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 프로필 비밀번호 비교 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ '
+  )
+  const { email, password } = req.body
+
+  try {
+    const findedMember = await MEMBER.findOne({
+      where: { email },
+    })
+    console.log('findedMember: ', findedMember)
+
+    // 비밀번호 확인
+    const compare = await comparePassword(password, findedMember.password)
+    if (compare) {
+      // 비밀번호 일치
+      res.json({ result: true })
+    } else {
+      res.json({ result: false, message: '비밀번호가 일치하지 않습니다' })
+    }
+  } catch (err) {
+    console.log(err)
+    res.json({ result: false, err: String(err) })
+  }
 }
 
 module.exports = {
@@ -468,6 +596,7 @@ module.exports = {
   postSignout,
 
   postBoard,
+  postBoardSearch,
   postBoardRegister,
   postBoardRegisterAction,
   postBoardRead,
@@ -479,6 +608,7 @@ module.exports = {
   postGraphAction,
 
   postProfile,
+  postProfilePassword,
 }
 
 const bcryptPassword = (password) => {

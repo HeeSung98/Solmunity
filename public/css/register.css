@@ -65,10 +65,6 @@ body {
 }
 
 .btnRegister {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   cursor: pointer;
   font-size: 20px;
   height: 30px;

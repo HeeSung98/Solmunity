@@ -8,156 +8,146 @@ body {
 
 body {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  margin: 0;
+  margin-top: 60px;
 }
 
 .main {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: auto;
-  justify-content: space-around;
-  overflow: hidden;
-  height: 90%;
-  /* margin-top: 10%; */
-  position: relative;
-  padding-bottom: 30px;
-  align-items: center;
+  width: 70%;
+  height: 100%;
 }
 
-.title {
+#greeting {
+  text-align: center;
   font-size: 30px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
 }
-.register {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  width: 90%;
-  align-items: center;
+
+#info {
+  text-align: center;
+  font-size: 20px;
 }
 
 .profile {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  position: relative;
-}
-
-#myProfile {
-  border-radius: 50%;
   width: 100%;
-  object-fit: cover;
-  height: 100%;
 }
 
-#profileImg {
-  width: 150px;
-  height: 150px;
-  border: 1px solid gainsboro;
-  border-radius: 50%;
-}
-
-#pencil {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  background-color: white;
-  border: solid 1px gainsboro;
-  border-radius: 50%;
-  bottom: 0;
-  right: 5%;
-  position: absolute;
-  align-items: center;
-  z-index: 1;
-}
-
-#pencil img {
-  width: 40px;
-}
-
-/* content */
-.content {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-}
-
-/* 닉네임 */
-.nickname {
-  font-size: 30px;
-  display: flex;
-  margin-bottom: 10px;
-  justify-content: center;
-}
-
-/* 프로필 수정 버튼 */
-#btn_edit {
+.divLine {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
-  width: 40%;
-  cursor: pointer;
+  margin: 30px 0;
+}
+
+label {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+  font-size: 20px;
+  margin: 0px 10px;
+}
+
+.inputModify {
+  padding: 0px 15px;
+  width: 35%;
   height: 30px;
-  margin-bottom: 10px;
-  /* background: rgb(234, 244, 78); */
-  background: greenyellow;
+  background: rgb(237, 235, 235);
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 10px;
+}
+
+.btnModify {
+  width: 90px;
+  height: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  background: lightgray;
   border-radius: 10px;
   border: 0;
+  margin: 0px 10px;
 }
 
-/* Modal */
-.modalH2 {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  font-family: 'HSSaemaul-Regular';
-  font-size: 30px;
+.myBoard {
+  width: 100%;
+  height: 20%;
 }
+
+.myCFG {
+  width: 100%;
+  height: 20%;
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 모달 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
 .modal {
-  position: absolute;
   display: none;
-  justify-content: center;
-  top: 0;
+  position: fixed;
+  z-index: 1;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  z-index: 20;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal_body {
-  box-sizing: content-box;
-  position: absolute;
-  top: 50%;
-  width: 400px;
-  height: 250px;
-  padding: 10px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  box-shadow: 0 10px 15px 0 rgba(34, 36, 38, 0.15);
-  transform: translateY(-50%);
-  z-index: 20;
+.modalContent {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  height: 30%;
+}
+
+.modalHeader {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+}
+
+#btnClose {
+  display: block;
+  width: 50px;
+  height: 30px;
+  margin-left: auto;
+  background-color: red;
+  color: white;
+  font-size: 15px;
+  text-align: center;
   align-items: center;
-  justify-content: space-around;
+  border: 0;
+  border-radius: 10px;
 }
 
-/* 탈퇴 */
-#btn_delete {
-  display: flex;
-  justify-content: center;
+#btnClose:hover,
+#btnClose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalBody {
   align-items: center;
   width: 100%;
-  cursor: pointer;
+  height: 50%;
+}
+
+.inputModifyModal {
+  padding: 0px 15px;
+  width: 60%;
   height: 30px;
-  margin-bottom: 10px;
-  color: red;
+  background: rgb(237, 235, 235);
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 10px;
+}
+
+.btnModifyModal {
+  width: 90px;
+  height: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  background: lightgray;
+  border-radius: 10px;
+  border: 0;
+  margin: 0px 10px;
 }

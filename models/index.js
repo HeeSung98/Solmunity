@@ -69,17 +69,6 @@ db.BOARD_IMAGE.belongsTo(db.BOARD, {
   sourceKey: 'bNo',
 })
 
-//멤버와 CFG의 연관관계
-// db.MEMBER.hasMany(db.CFG, {
-//   foreignKey: 'MEMBER_email',
-//   sourceKey: 'email',
-//   onDelete: 'CASCADE',
-// })
-// db.CFG.belongsTo(db.MEMBER, {
-//   foreignKey: 'MEMBER_email',
-//   sourceKey: 'email',
-// })
-
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 

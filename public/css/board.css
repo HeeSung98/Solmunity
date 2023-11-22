@@ -45,6 +45,7 @@ body {
   cursor: pointer;
   width: 5vw;
   height: 30px;
+  margin-top: 5px;
 }
 
 .register {

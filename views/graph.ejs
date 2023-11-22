@@ -18,8 +18,12 @@
   <body>
     <%- include('header') %>
     <div class="main">
-      <button type="button" id="btnOpenModal">제어 흐름 그래프 생성하기</button>
-      <div><img id="imgGraph" src="" /></div>
+      <div class="divHeader">
+        <button type="button" id="btnOpenModal">
+          제어 흐름 그래프 생성하기
+        </button>
+      </div>
+      <div class="divGraph"><img id="imgGraph" src="" /></div>
     </div>
 
     <input type="file" id="file" hidden />
@@ -45,15 +49,17 @@
   </body>
 
   <script>
-    const email = member.email
-
     const modal = document.querySelector('.modal')
     const btnOpenModal = document.getElementById('btnOpenModal')
     const btnClose = document.getElementById('btnClose')
     const imgGraph = document.getElementById('imgGraph')
 
     btnOpenModal.addEventListener('click', function () {
-      modal.style.display = 'block'
+      if (member == null) {
+        alert('로그인 후 그래프를 생성할 수 있습니다')
+      } else {
+        modal.style.display = 'block'
+      }
     })
 
     btnClose.addEventListener('click', function () {
@@ -61,6 +67,8 @@
     })
 
     async function generate() {
+      const email = member.email
+
       const data = {
         name: document.querySelector('#name').value,
         code: document.querySelector('#code').value,
