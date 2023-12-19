@@ -53,11 +53,11 @@
         // 로그인 상태로 판별하고 해당 닉네임을 사용
         innerHeaderLogin.innerText = '로그아웃'
         innerHeaderLogin.onclick = async () => {
-          const respone = await axios({
+          const response = await axios({
             method: 'POST',
             url: '/signout',
           })
-          const resData = respone.data
+          const resData = response.data
           console.log(resData)
 
           if (resData.logoutSuccess) {

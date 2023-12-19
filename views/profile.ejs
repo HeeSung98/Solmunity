@@ -104,12 +104,12 @@
       }
       console.log('data: ', data)
 
-      const respone = await axios({
+      const response = await axios({
         method: 'PATCH',
         url: '/profile/modify',
         data,
       })
-      resData = respone.data
+      resData = response.data
       console.log(resData)
 
       if (resData.result) {
@@ -132,12 +132,12 @@
         password: document.querySelector('#password').value,
       }
 
-      const respone = await axios({
+      const response = await axios({
         method: 'POST',
         url: '/profile/password',
         data,
       })
-      resData = respone.data
+      resData = response.data
       console.log(resData)
 
       if (resData.result) {
@@ -175,12 +175,12 @@
         alert('비밀번호가 일치하지 않습니다!')
       }
 
-      const respone = await axios({
+      const response = await axios({
         method: 'PATCH',
         url: '/profile/modify',
         data,
       })
-      resData = respone.data
+      resData = response.data
       console.log(resData)
 
       if (resData.result) {

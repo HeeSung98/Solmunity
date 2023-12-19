@@ -184,7 +184,7 @@ const postBoardSearch = async (req, res) => {
           },
           {
             content: {
-              [sequelize.Op.like]: `%${keyword}%`, // 제목 검색
+              [sequelize.Op.like]: `%${keyword}%`, // 내용 검색
             },
           },
         ],

@@ -41,6 +41,7 @@ const getBoard = async (req, res) => {
           required: false,
         },
       ],
+      order: [['bNo', 'ASC']],
     })
 
     //게시물 번호

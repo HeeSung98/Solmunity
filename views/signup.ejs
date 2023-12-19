@@ -115,12 +115,12 @@
         fromSocial: 0,
       }
 
-      const respone = await axios({
+      const response = await axios({
         method: 'POST',
         url: '/signup/action',
         data,
       })
-      const resData = respone.data
+      const resData = response.data
       console.log('resData:', resData)
 
       if (resData.result) {

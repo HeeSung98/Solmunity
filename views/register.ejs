@@ -66,7 +66,7 @@
       data.append('MEMBER_email', member.email)
       data.append('file', file.files[0])
 
-      const respone = await axios({
+      const response = await axios({
         method: 'POST',
         data,
         url: '/board/register/action',
@@ -74,7 +74,7 @@
           'Content-Type': 'multipart/form-data',
         },
       })
-      resData = respone.data
+      resData = response.data
       console.log(resData)
 
       if (resData.result) {

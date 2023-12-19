@@ -16,6 +16,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 const router = require('./router/SolmunityRouter')
 app.use('/', router)
 
+app.get('/testtest', (req, res) => {
+  res.redirect('http://localhost:8080/oauth2/authorization/google')
+})
+
 //오류처리
 app.use('*', (req, res) => {
   res.status(404).render('404')

@@ -75,12 +75,12 @@
         email,
       }
 
-      const respone = await axios({
+      const response = await axios({
         method: 'POST',
         data,
         url: '/graph/action',
       })
-      resData = respone.data
+      resData = response.data
       console.log(resData)
 
       if (resData.result) {
