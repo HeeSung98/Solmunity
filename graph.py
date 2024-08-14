@@ -5,6 +5,13 @@ import boto3
 from pathlib import Path
 from solidity_parser import parser
 from time import time
+from dotenv import load_dotenv
+
+# load .env
+load_dotenv()
+
+S3_KEYID = os.environ.get('S3_KEYID')
+S3_ACCESSKEY = os.environ.get('S3_ACCESSKEY')
 
 
 def s3_connection():
@@ -13,8 +20,8 @@ def s3_connection():
         s3 = boto3.client(
             service_name="s3",
             region_name="ap-northeast-2",
-            aws_access_key_id="AKIAVO5NLNBM3VISJPVS",
-            aws_secret_access_key="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",
+            aws_access_key_id=S3_KEYID,
+            aws_secret_access_key=S3_ACCESSKEY,
         )
     except Exception as e:
         print(e)
